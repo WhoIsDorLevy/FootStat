@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Stats App</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="cancel">Cancel</string>
+    <string name="insert_match_textview">Insert Match</string>
+    <string name="enter_stats_textview">Please enter the following stats:</string>
+    <string name="enter_button_text">Enter</string>
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="welcome">Welcome to TindeRegel!</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="match_dif">Match Difficulty (1 – 5)</string>
+    <string name="r_goals">Right Foot Goals</string>
+    <string name="l_goals">Left Foot Goals</string>
+    <string name="h_goals">Goals Scored by a Header/Other</string>
+    <string name="assists">Assists</string>
+    <string name="r_penalties_made">Penalties Made to the Right side of the Goal</string>
+    <string name="l_penalties_made">Penalties Made to the Left side of the Goal</string>
+    <string name="r_penalties_missed">Penalties Missed to the Right side of the Goal</string>
+    <string name="l_penalties_missed">Penalties Missed to the Left side of the Goal</string>
+
+</resources>
