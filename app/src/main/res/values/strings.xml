@@ -22,5 +22,13 @@
     <string name="l_penalties_made">Penalties Made to the Left side of the Goal</string>
     <string name="r_penalties_missed">Penalties Missed to the Right side of the Goal</string>
     <string name="l_penalties_missed">Penalties Missed to the Left side of the Goal</string>
+    <string name="choose_stats">Please choose which stats<br /> you\'d like to see:</string>
+    <string name="show_totals">Show totals</string>
+    <string name="show_averages">Show averages</string>
+    <string name="show_stats">Show stats</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="feature_not_yet">"This feature hasn\'t been developed yet, do not let Neta peek!"</string>
+    <string name="no_settings">There are no settings</string>
+    <string name="home">Home</string>
 
 </resources>

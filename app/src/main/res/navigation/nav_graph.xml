@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_ShowStatsFragment"
+            app:destination="@id/showStatsFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -23,6 +26,24 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showStatsFragment"
+        android:name="com.example.statsapp.ShowStatsFragment"
+        android:label="fragment_show_stats"
+        tools:layout="@layout/fragment_show_stats" >
+        <action
+            android:id="@+id/action_showStatsFragment_to_showStatsContFragment"
+            app:destination="@id/showStatsContFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/showStatsContFragment"
+        android:name="com.example.statsapp.ShowStatsContFragment"
+        android:label="fragment_show_stats_cont"
+        tools:layout="@layout/fragment_show_stats_cont" >
+        <action
+            android:id="@+id/action_showStatsContFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

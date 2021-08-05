@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color3"
+    tools:context=".ShowStatsFragment">
+
+    <TextView
+        android:id="@+id/chooseStats"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal"
+        android:text="@string/choose_stats"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/matchDifCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <CheckBox
+        android:id="@+id/matchDifCheckBox"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/match_dif"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/rGoalsCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseStats" />
+
+    <CheckBox
+        android:id="@+id/rGoalsCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/r_goals"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/lGoalsCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matchDifCheckBox" />
+
+    <CheckBox
+        android:id="@+id/lGoalsCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/l_goals"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/hGoalsCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rGoalsCheckBox" />
+
+    <CheckBox
+        android:id="@+id/hGoalsCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/h_goals"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/assistsCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lGoalsCheckBox" />
+
+    <CheckBox
+        android:id="@+id/assistsCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/assists"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/rPenaltiesMadeCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hGoalsCheckBox" />
+
+    <CheckBox
+        android:id="@+id/rPenaltiesMadeCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/r_penalties_made"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/lPenaltiesMadeCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/assistsCheckBox" />
+
+    <CheckBox
+        android:id="@+id/lPenaltiesMadeCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/l_penalties_made"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/rPenaltiesMissedCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rPenaltiesMadeCheckBox" />
+
+    <CheckBox
+        android:id="@+id/rPenaltiesMissedCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/r_penalties_missed"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/lPenaltiesMissedCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lPenaltiesMadeCheckBox" />
+
+    <CheckBox
+        android:id="@+id/lPenaltiesMissedCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/l_penalties_missed"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/showTotalsCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rPenaltiesMissedCheckBox" />
+
+    <CheckBox
+        android:id="@+id/showTotalsCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/show_totals"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/showAveragesCheckBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lPenaltiesMissedCheckBox" />
+
+    <CheckBox
+        android:id="@+id/showAveragesCheckBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/show_averages"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_show_chosen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showTotalsCheckBox" />
+
+    <Button
+        android:id="@+id/button_show_chosen"
+        android:layout_width="129dp"
+        android:layout_height="59dp"
+        android:baselineAligned="false"
+        android:text="@string/show_stats"
+        app:backgroundTint="@color/button_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showAveragesCheckBox" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
