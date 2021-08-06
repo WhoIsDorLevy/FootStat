@@ -18,10 +18,10 @@
     <string name="l_goals">Left Foot Goals</string>
     <string name="h_goals">Goals Scored by a Header/Other</string>
     <string name="assists">Assists</string>
-    <string name="r_penalties_made">Penalties Made to the Right side of the Goal</string>
-    <string name="l_penalties_made">Penalties Made to the Left side of the Goal</string>
-    <string name="r_penalties_missed">Penalties Missed to the Right side of the Goal</string>
-    <string name="l_penalties_missed">Penalties Missed to the Left side of the Goal</string>
+    <string name="r_penalties_made">Penalties Made to the Goal\'s Right Side</string>
+    <string name="l_penalties_made">Penalties Made to the Goal\'s Left Side</string>
+    <string name="r_penalties_missed">Penalties Missed to the Goal\'s Right Side</string>
+    <string name="l_penalties_missed">Penalties Missed to the Goal\'s Left Side</string>
     <string name="choose_stats">Please choose which stats<br /> you\'d like to see:</string>
     <string name="show_totals">Show totals</string>
     <string name="show_averages">Show averages</string>

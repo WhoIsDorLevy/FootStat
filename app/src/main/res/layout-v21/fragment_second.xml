@@ -9,28 +9,13 @@
 
     <EditText
         android:id="@+id/HGoalsEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
         android:hint="@string/h_goals"
         android:inputType="numberDecimal"
         android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345" />
-
-    <EditText
-        android:id="@+id/AssistsEditText"
-        android:layout_width="379dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="@string/assists"
-        android:inputType="numberDecimal"
-        android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,14 +23,14 @@
         app:layout_constraintVertical_bias="0.405" />
 
     <EditText
-        android:id="@+id/RPenaltiesMadeEditText"
-        android:layout_width="379dp"
+        android:id="@+id/AssistsEditText"
+        android:layout_width="350dp"
         android:layout_height="43dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
-        android:hint="@string/r_penalties_made"
+        android:hint="@string/assists"
         android:inputType="numberDecimal"
         android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,14 +38,14 @@
         app:layout_constraintVertical_bias="0.465" />
 
     <EditText
-        android:id="@+id/LPenaltiesMadeEditText"
-        android:layout_width="379dp"
+        android:id="@+id/RPenaltiesMadeEditText"
+        android:layout_width="350dp"
         android:layout_height="43dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
-        android:hint="@string/l_penalties_made"
+        android:hint="@string/r_penalties_made"
         android:inputType="numberDecimal"
         android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,48 +53,64 @@
         app:layout_constraintVertical_bias="0.525" />
 
     <EditText
-        android:id="@+id/LPenaltiesMissedEditText"
-        android:layout_width="379dp"
+        android:id="@+id/LPenaltiesMadeEditText"
+        android:layout_width="350dp"
         android:layout_height="43dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
-        android:hint="@string/l_penalties_missed"
+        android:hint="@string/l_penalties_made"
         android:inputType="numberDecimal"
         android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.645" />
-
-    <EditText
-        android:id="@+id/RPenaltiesMissedEditText"
-        android:layout_width="379dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="@string/r_penalties_missed"
-        android:inputType="numberDecimal"
-        android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.585" />
 
+    <EditText
+        android:id="@+id/LPenaltiesMissedEditText"
+        android:layout_width="350dp"
+        android:layout_height="43dp"
+        android:backgroundTint="@color/black"
+        android:ems="10"
+        android:hint="@string/l_penalties_missed"
+        android:inputType="numberDecimal"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.705" />
+
+    <EditText
+        android:id="@+id/RPenaltiesMissedEditText"
+        android:layout_width="350dp"
+        android:layout_height="43dp"
+        android:backgroundTint="@color/black"
+        android:ems="10"
+        android:hint="@string/r_penalties_missed"
+        android:inputType="numberDecimal"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.645" />
+
     <TextView
         android:id="@+id/enter_stats_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center|center_horizontal|center_vertical"
         android:text="@string/enter_stats_textview"
-        android:textSize="28sp"
         android:textColor="@color/black"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.066" />
+        app:layout_constraintVertical_bias="0.059" />
 
     <Button
         android:id="@+id/button_cancel"
@@ -125,28 +126,13 @@
 
     <EditText
         android:id="@+id/matchDifEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
         android:hint="@string/match_dif"
         android:inputType="numberDecimal"
         android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.165" />
-
-    <EditText
-        android:id="@+id/RGoalsEditText"
-        android:layout_width="379dp"
-        android:layout_height="43dp"
-        android:ems="10"
-        android:hint="@string/r_goals"
-        android:inputType="numberDecimal"
-        android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,19 +140,34 @@
         app:layout_constraintVertical_bias="0.225" />
 
     <EditText
-        android:id="@+id/LGoalsEditText"
-        android:layout_width="379dp"
+        android:id="@+id/RGoalsEditText"
+        android:layout_width="350dp"
         android:layout_height="43dp"
+        android:backgroundTint="@color/black"
         android:ems="10"
-        android:hint="@string/l_goals"
+        android:hint="@string/r_goals"
         android:inputType="numberDecimal"
         android:textColorHint="@color/black"
-        android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.285" />
+
+    <EditText
+        android:id="@+id/LGoalsEditText"
+        android:layout_width="350dp"
+        android:layout_height="43dp"
+        android:backgroundTint="@color/black"
+        android:ems="10"
+        android:hint="@string/l_goals"
+        android:inputType="numberDecimal"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.345" />
 
     <Button
         android:id="@+id/button_enter"
@@ -180,5 +181,5 @@
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintVertical_bias="0.844" />
 </androidx.constraintlayout.widget.ConstraintLayout>

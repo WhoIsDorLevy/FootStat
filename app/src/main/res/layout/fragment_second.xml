@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/HGoalsEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/h_goals"
@@ -24,7 +24,7 @@
 
     <EditText
         android:id="@+id/AssistsEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/assists"
@@ -39,7 +39,7 @@
 
     <EditText
         android:id="@+id/RPenaltiesMadeEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/r_penalties_made"
@@ -54,7 +54,7 @@
 
     <EditText
         android:id="@+id/LPenaltiesMadeEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/l_penalties_made"
@@ -69,7 +69,7 @@
 
     <EditText
         android:id="@+id/LPenaltiesMissedEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/l_penalties_missed"
@@ -84,7 +84,7 @@
 
     <EditText
         android:id="@+id/RPenaltiesMissedEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/r_penalties_missed"
@@ -125,7 +125,7 @@
 
     <EditText
         android:id="@+id/matchDifEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/match_dif"
@@ -140,7 +140,7 @@
 
     <EditText
         android:id="@+id/RGoalsEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/r_goals"
@@ -155,7 +155,7 @@
 
     <EditText
         android:id="@+id/LGoalsEditText"
-        android:layout_width="379dp"
+        android:layout_width="350dp"
         android:layout_height="43dp"
         android:ems="10"
         android:hint="@string/l_goals"
