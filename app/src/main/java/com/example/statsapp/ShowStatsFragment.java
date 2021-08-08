@@ -65,13 +65,15 @@ public class ShowStatsFragment extends Fragment {
                 if (!b) {
                     binding.SortByFootCheckBox.setChecked(false);
                 }
-                updateMinButtons(b);
+                updateMatchDif(b);
+                updateShowChosen(b);
             }
         });
         binding.assistsCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                updateMinButtons(b);
+                updateMatchDif(b);
+                updateShowChosen(b);
             }
         });
         binding.PenaltiesCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -81,13 +83,30 @@ public class ShowStatsFragment extends Fragment {
                 if (!b) {
                     binding.SortBySideCheckBox.setChecked(false);
                 }
-                updateMinButtons(b);
+                updateShowChosen(b);
             }
         });
     }
 
     //update buttons that require at least one category to be enabled
-    private void updateMinButtons(boolean b){
+    private void updateMatchDif(boolean b){
+        if (b != binding.matchDifCheckBox.isEnabled()) {
+
+            if (!binding.GoalsCheckBox.isChecked() &&
+                    !binding.assistsCheckBox.isChecked()) {
+
+                binding.matchDifCheckBox.setEnabled(false);
+                binding.matchDifCheckBox.setChecked(false);
+            }
+
+            else if (!binding.matchDifCheckBox.isEnabled()) {
+                binding.matchDifCheckBox.setEnabled(true);
+            }
+
+        }
+    }
+
+    private void updateShowChosen(boolean b){
         if (b != binding.buttonShowChosen.isEnabled()) {
 
             if (!binding.GoalsCheckBox.isChecked() &&
@@ -95,13 +114,10 @@ public class ShowStatsFragment extends Fragment {
                     !binding.PenaltiesCheckBox.isChecked()) {
 
                 binding.buttonShowChosen.setEnabled(false);
-                binding.matchDifCheckBox.setEnabled(false);
-                binding.matchDifCheckBox.setChecked(false);
             }
 
             else if (!binding.buttonShowChosen.isEnabled()) {
                 binding.buttonShowChosen.setEnabled(true);
-                binding.matchDifCheckBox.setEnabled(true);
             }
 
         }

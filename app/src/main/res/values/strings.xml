@@ -4,7 +4,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">TindeRegel</string>
     <string name="second_fragment_label">Insert Match</string>
-    <string name="next">Next</string>
+    <string name="show_stats_fragment_label">Show Stats</string>
+    <string name="exit">Exit</string>
     <string name="previous">Previous</string>
     <string name="cancel">Cancel</string>
     <string name="insert_match_textview">Insert Match</string>
@@ -14,6 +15,12 @@
     <string name="welcome">Welcome to TindeRegel!</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="match_dif">Match Difficulty (1 – 5)</string>
+    <string name="match_dif_show_stats">Match<br />difficulty</string>
+    <string name="goals">Goals</string>
+    <string name="sort_by_foot">Sort by Foot</string>
+    <string name="sort_by_side">Sort by Side</string>
+    <string name="sort_by_match_dif">Sort by Match Difficulty<br />(Goals &amp; Assists)</string>
+    <string name="penalties">Penalties</string>
     <string name="r_goals">Right Foot Goals</string>
     <string name="l_goals">Left Foot Goals</string>
     <string name="h_goals">Goals Scored by a Header/Other</string>
@@ -23,12 +30,20 @@
     <string name="r_penalties_missed">Penalties Missed to the Goal\'s Right Side</string>
     <string name="l_penalties_missed">Penalties Missed to the Goal\'s Left Side</string>
     <string name="choose_stats">Please choose which stats<br /> you\'d like to see:</string>
-    <string name="show_totals">Show totals</string>
-    <string name="show_averages">Show averages</string>
+    <string name="show_totals">Show Totals</string>
+    <string name="show_averages">Show Averages</string>
     <string name="show_stats">Show stats</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="feature_not_yet">"This feature hasn\'t been developed yet, do not let Neta peek!"</string>
     <string name="no_settings">There are no settings</string>
     <string name="home">Home</string>
+    <string name="_1">   1   </string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="total">total</string>
+
 
 </resources>

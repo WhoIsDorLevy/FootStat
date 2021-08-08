@@ -100,12 +100,6 @@ public class SecondFragment extends Fragment {
         lPenaltiesMissedVal = (isEmptyEditText(binding.LPenaltiesMissedEditText)) ? "0" : binding.LPenaltiesMissedEditText.getText().toString();
 
 
-//        for (EditText curr :inputs.keySet()){
-//            if (!isEmptyEditText(curr)){
-//                inputs.put(curr, curr.getText().toString());
-//            }
-//        }
-
 
     }
 
@@ -125,10 +119,6 @@ public class SecondFragment extends Fragment {
         db.insert(AppDB.MATCHES_TABLE_NAME, null, values);
 
 
-//        for (String currTableName : tableNameToEditText.keySet()){
-//            values.put(currTableName, inputs.get(tableNameToEditText.get(currTableName)));
-//        }
-//        db.insert(AppDB.MATCHES_TABLE_NAME, null, values);
 
     }
 

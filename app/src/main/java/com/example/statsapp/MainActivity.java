@@ -57,19 +57,19 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private static Connection setConnection(){
-        Connection output = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            output = DriverManager.getConnection("jdbc:mysql://204.2.195.209:425/TindeRegel", "WhoIsDor","humUuw8i!");
-        } catch (SQLException connectFail){
-//            Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
-            System.out.println("failed to create connection");
-        } catch (ClassNotFoundException driverEx){
-            System.out.println("failed to find driver");
-        }
-        return output;
-    }
+//    private static Connection setConnection(){
+//        Connection output = null;
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            output = DriverManager.getConnection("jdbc:mysql://204.2.195.209:425/TindeRegel", "WhoIsDor","humUuw8i!");
+//        } catch (SQLException connectFail){
+////            Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
+//            System.out.println("failed to create connection");
+//        } catch (ClassNotFoundException driverEx){
+//            System.out.println("failed to find driver");
+//        }
+//        return output;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

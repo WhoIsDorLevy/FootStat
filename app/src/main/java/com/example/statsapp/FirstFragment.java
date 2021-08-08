@@ -24,22 +24,22 @@ public class FirstFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        setConnection();
+//        setConnection();
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
-    private static void setConnection(){
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://204.2.195.209:425/TindeRegel", "WhoIsDor","humUuw8i!");
-        } catch (SQLException connectFail){
-//            Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
-            System.out.println("failed to create connection");
-        } catch (ClassNotFoundException driverEx){
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\nfailed to find driver\n\n\n\n\n\n\n\n\n\n\n\n");
-        }
-    }
+//    private static void setConnection(){
+//        try {
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            conn = DriverManager.getConnection("jdbc:mysql://204.2.195.209:425/TindeRegel", "WhoIsDor","humUuw8i!");
+//        } catch (SQLException connectFail){
+////            Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
+//            System.out.println("failed to create connection");
+//        } catch (ClassNotFoundException driverEx){
+//            System.out.println("\n\n\n\n\n\n\n\n\n\n\nfailed to find driver\n\n\n\n\n\n\n\n\n\n\n\n");
+//        }
+//    }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -56,6 +56,14 @@ public class FirstFragment extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(FirstFragment.this)
                         .navigate(R.id.action_FirstFragment_to_ShowStatsFragment);
+            }
+        });
+
+        binding.buttonExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+                System.exit(0);
             }
         });
     }
