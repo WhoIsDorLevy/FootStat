@@ -15,7 +15,7 @@
     <string name="welcome">Welcome to TindeRegel!</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="match_dif">Match Difficulty (1 – 5)</string>
-    <string name="match_dif_show_stats">Match<br />difficulty</string>
+    <string name="match_dif_show_stats">Match <br />Difficulty</string>
     <string name="goals">Goals</string>
     <string name="sort_by_foot">Sort by Foot</string>
     <string name="sort_by_side">Sort by Side</string>
@@ -37,13 +37,20 @@
     <string name="feature_not_yet">"This feature hasn\'t been developed yet, do not let Neta peek!"</string>
     <string name="no_settings">There are no settings</string>
     <string name="home">Home</string>
-    <string name="_1">   1   </string>
+    <string name="_1">1</string>
     <string name="_2">2</string>
     <string name="_3">3</string>
     <string name="_4">4</string>
     <string name="_5">5</string>
     <string name="_6">6</string>
-    <string name="total">total</string>
+    <string name="total">Total</string>
+    <string name="goals_right">Goals:<br /> Right</string>
+    <string name="goals_left">Goals:<br /> Left</string>
+    <string name="right">Right</string>
+    <string name="left">Left</string>
+    <string name="header_other">Goals: <br />Header/Other</string>
+    <string name="made">Made</string>
+    <string name="missed">Missed</string>
 
 
 </resources>
