@@ -13,7 +13,6 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -60,25 +59,19 @@ public class ShowStatsContFragment extends Fragment {
         setStats();
         fillStatsToTable(false);
         filterTable();
-        binding.switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b){
-                    binding.switch2.setText(R.string.show_averages);
-                }
-                else {
-                    binding.switch2.setText(R.string.show_totals);
-                }
-                fillStatsToTable(b);
+        binding.switch2.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b){
+                binding.switch2.setText(R.string.show_averages);
             }
+            else {
+                binding.switch2.setText(R.string.show_totals);
+            }
+            fillStatsToTable(b);
         });
-        binding.buttonHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+        binding.buttonHome.setOnClickListener(view1 ->
                 NavHostFragment.findNavController(ShowStatsContFragment.this)
-                        .navigate(R.id.action_showStatsContFragment_to_FirstFragment);
-            }
-        });
+                .navigate(R.id.action_showStatsContFragment_to_FirstFragment));
     }
 
     private void setDB(MainActivity activity){
@@ -240,6 +233,8 @@ public class ShowStatsContFragment extends Fragment {
         //get total number of penalties without sorting by side
         totalMadePens = statsTotUnsorted[5] + statsTotUnsorted[6];
         totalMissedPens = statsTotUnsorted[7] + statsTotUnsorted[8];
+
+        cursor.close();
     }
     
     private void fillStatsToTable(boolean averages){

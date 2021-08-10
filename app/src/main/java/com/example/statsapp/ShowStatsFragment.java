@@ -15,12 +15,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.statsapp.databinding.FragmentFirstBinding;
+
 import com.example.statsapp.databinding.FragmentShowStatsBinding;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 public class ShowStatsFragment extends Fragment {
@@ -43,48 +40,39 @@ public class ShowStatsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonShowChosen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CheckBox[] checkBoxes = new CheckBox[]{binding.GoalsCheckBox, binding.SortByFootCheckBox,
-                                                        binding.assistsCheckBox, binding.PenaltiesCheckBox,
-                                                        binding.SortBySideCheckBox, binding.matchDifCheckBox};
-                Boolean[] boxedArr = Helpers.map(checkBoxes, CompoundButton::isChecked, () -> new Boolean[0]);
-                boolean[] checksPrimitive = Helpers.toPrimitiveBoolean(boxedArr);
+        binding.buttonShowChosen.setOnClickListener(view1 -> {
+            CheckBox[] checkBoxes = new CheckBox[]{binding.GoalsCheckBox, binding.SortByFootCheckBox,
+                                                    binding.assistsCheckBox, binding.PenaltiesCheckBox,
+                                                    binding.SortBySideCheckBox, binding.matchDifCheckBox};
+            Boolean[] boxedArr = Helpers.map(checkBoxes, CompoundButton::isChecked, () -> new Boolean[0]);
+            boolean[] checksPrimitive = Helpers.toPrimitiveBoolean(boxedArr);
 
-                ShowStatsFragmentDirections.ActionShowStatsFragmentToShowStatsContFragment action =
-                        ShowStatsFragmentDirections.actionShowStatsFragmentToShowStatsContFragment(checksPrimitive);
-                NavHostFragment.findNavController(ShowStatsFragment.this)
-                        .navigate(action);
-            }
+            ShowStatsFragmentDirections.ActionShowStatsFragmentToShowStatsContFragment action =
+                    ShowStatsFragmentDirections.actionShowStatsFragmentToShowStatsContFragment(checksPrimitive);
+            NavHostFragment.findNavController(ShowStatsFragment.this)
+                    .navigate(action);
         });
-        binding.GoalsCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                binding.SortByFootCheckBox.setEnabled(b);
-                if (!b) {
-                    binding.SortByFootCheckBox.setChecked(false);
-                }
-                updateMatchDif(b);
-                updateShowChosen(b);
+
+        binding.GoalsCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
+            binding.SortByFootCheckBox.setEnabled(b);
+            if (!b) {
+                binding.SortByFootCheckBox.setChecked(false);
             }
+            updateMatchDif(b);
+            updateShowChosen(b);
         });
-        binding.assistsCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                updateMatchDif(b);
-                updateShowChosen(b);
-            }
+
+        binding.assistsCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
+            updateMatchDif(b);
+            updateShowChosen(b);
         });
-        binding.PenaltiesCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                binding.SortBySideCheckBox.setEnabled(b);
-                if (!b) {
-                    binding.SortBySideCheckBox.setChecked(false);
-                }
-                updateShowChosen(b);
+
+        binding.PenaltiesCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
+            binding.SortBySideCheckBox.setEnabled(b);
+            if (!b) {
+                binding.SortBySideCheckBox.setChecked(false);
             }
+            updateShowChosen(b);
         });
     }
 

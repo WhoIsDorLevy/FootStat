@@ -6,7 +6,6 @@ import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -18,9 +17,6 @@ import com.example.statsapp.databinding.ActivityMainBinding;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,13 +37,10 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Sorry, we don't receive complaints this week", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        binding.fab.setOnClickListener(view ->
+                Snackbar.make(view, "Sorry, we don't receive complaints this week",
+                        Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show());
     }
 
     @Override
@@ -56,20 +49,6 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
-//    private static Connection setConnection(){
-//        Connection output = null;
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            output = DriverManager.getConnection("jdbc:mysql://204.2.195.209:425/TindeRegel", "WhoIsDor","humUuw8i!");
-//        } catch (SQLException connectFail){
-////            Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
-//            System.out.println("failed to create connection");
-//        } catch (ClassNotFoundException driverEx){
-//            System.out.println("failed to find driver");
-//        }
-//        return output;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
