@@ -9,7 +9,8 @@
     <Switch
         android:id="@+id/switch2"
         android:layout_width="175dp"
-        android:layout_height="32dp"
+        android:layout_height="45dp"
+        android:gravity="center"
         android:text="@string/show_totals"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -512,7 +513,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.712">
+        app:layout_constraintVertical_bias="0.672">
 
         <TableRow
             android:id="@+id/PenTabHeadRow"

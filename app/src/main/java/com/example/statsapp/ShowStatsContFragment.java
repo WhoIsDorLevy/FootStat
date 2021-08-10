@@ -32,6 +32,10 @@ public class ShowStatsContFragment extends Fragment {
     private double[][] statsAvgSorted;
     private int[] statsTotUnsorted;
     private double[] statsAvgUnsorted;
+    private int[] totalGoals;
+    private int totalMadePens;
+    private int totalMissedPens;
+    private int totalNumOfMatches;
     private final int numOfMatchDifs = 5;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -65,6 +69,7 @@ public class ShowStatsContFragment extends Fragment {
                 else {
                     binding.switch2.setText(R.string.show_totals);
                 }
+                fillStatsToTable(b);
             }
         });
         binding.buttonHome.setOnClickListener(new View.OnClickListener() {
@@ -198,7 +203,6 @@ public class ShowStatsContFragment extends Fragment {
         while (cursor.moveToNext()){
             int matchDifInd = cursor.getColumnIndex(AppDB.MATCH_DIFFICULTY_TABLE_NAME);
             int matchDif = cursor.getInt(matchDifInd);
-            System.out.println(matchDif);
             statsTotSorted[matchDif - 1][0]++;
             for (int i = 1; i < AppDB.NUM_OF_COLS; i++){
                 statsTotSorted[matchDif - 1][i] += cursor.getInt(i);
@@ -214,58 +218,120 @@ public class ShowStatsContFragment extends Fragment {
 
         //calculate averages sorted
         for (int i = 0; i < statsAvgSorted.length; i++){
-            statsAvgSorted[i][0] = ((double)statsTotSorted[i][0]) / statsTotUnsorted[0];
+            statsAvgSorted[i][0] = performDivision(statsTotSorted[i][0], statsTotUnsorted[0]);
             for (int j = 1; j < AppDB.NUM_OF_COLS; j++){
-                statsAvgSorted[i][j] = ((double) statsTotSorted[i][j]) / ((double) statsTotSorted[i][0]);
+                statsAvgSorted[i][j] = performDivision(statsTotSorted[i][j], statsTotSorted[i][0]);
             }
         }
 
         //calculate averages unsorted
-        double numOfMatches = cursor.getCount();
+        totalNumOfMatches = cursor.getCount();
         for (int i = 0; i < AppDB.NUM_OF_COLS; i++){
-            statsAvgUnsorted[i] = ((double) statsTotUnsorted[i]) / numOfMatches;
+            statsAvgUnsorted[i] = performDivision(statsTotUnsorted[i], totalNumOfMatches);
         }
+
+        //get total number of goals without sorting by foot
+        totalGoals = new int[numOfMatchDifs + 1];//one for total's total
+        for (int i = 0; i < numOfMatchDifs; i++){
+            totalGoals[i] = statsTotSorted[i][1] + statsTotSorted[i][2] + statsTotSorted[i][3];
+            totalGoals[5] += totalGoals[i];
+        }
+
+        //get total number of penalties without sorting by side
+        totalMadePens = statsTotUnsorted[5] + statsTotUnsorted[6];
+        totalMissedPens = statsTotUnsorted[7] + statsTotUnsorted[8];
     }
     
     private void fillStatsToTable(boolean averages){
-        //right goals row
-        setSortedStatInPlace(averages,binding.TabRG1,1, 1);
-        setSortedStatInPlace(averages,binding.TabRG2,2,1);
-        setSortedStatInPlace(averages,binding.TabRG3,3,1);
-        setSortedStatInPlace(averages,binding.TabRG4,4,1);
-        setSortedStatInPlace(averages,binding.TabRG5,5,1);
-        setUnsortedStatInPlace(averages,binding.TabRGT,1);
 
-        //left goals row
-        setSortedStatInPlace(averages,binding.TabLG1,1, 2);
-        setSortedStatInPlace(averages,binding.TabLG2,2, 2);
-        setSortedStatInPlace(averages,binding.TabLG3,3, 2);
-        setSortedStatInPlace(averages,binding.TabLG4,4, 2);
-        setSortedStatInPlace(averages,binding.TabLG5,5, 2);
-        setUnsortedStatInPlace(averages,binding.TabLGT,2);
+        if (checks[0]) {
+            fillGoals(averages);
+        }
 
-        //head goals row
-        setSortedStatInPlace(averages,binding.TabHG1,1, 3);
-        setSortedStatInPlace(averages,binding.TabHG2,2, 3);
-        setSortedStatInPlace(averages,binding.TabHG3,3, 3);
-        setSortedStatInPlace(averages,binding.TabHG4,4, 3);
-        setSortedStatInPlace(averages,binding.TabHG5,5, 3);
-        setUnsortedStatInPlace(averages,binding.TabHGT,3);
+        if (checks[2]){
+            fillAssists(averages);
+        }
 
-        //assists row
-        setSortedStatInPlace(averages,binding.TabAs1,1, 4);
-        setSortedStatInPlace(averages,binding.tabAs2,2, 4);
-        setSortedStatInPlace(averages,binding.tabAs3,3, 4);
-        setSortedStatInPlace(averages,binding.tabAs4,4, 4);
-        setSortedStatInPlace(averages,binding.tabAs5,5, 4);
+        if (checks[3]){
+            fillPenalties(averages);
+        }
+    }
+
+    private void fillGoals(boolean averages){
+        boolean sortFoot = checks[1];
+        boolean matchDif = checks[5];
+
+        if (sortFoot) {
+            //right goals row
+            if (matchDif) {
+                setSortedStatInPlace(averages, binding.TabRG1, 1, 1);
+                setSortedStatInPlace(averages, binding.TabRG2, 2, 1);
+                setSortedStatInPlace(averages, binding.TabRG3, 3, 1);
+                setSortedStatInPlace(averages, binding.TabRG4, 4, 1);
+                setSortedStatInPlace(averages, binding.TabRG5, 5, 1);
+            }
+            //total
+            setUnsortedStatInPlace(averages, binding.TabRGT, 1);
+
+            //left goals row
+            if (matchDif) {
+                setSortedStatInPlace(averages, binding.TabLG1, 1, 2);
+                setSortedStatInPlace(averages, binding.TabLG2, 2, 2);
+                setSortedStatInPlace(averages, binding.TabLG3, 3, 2);
+                setSortedStatInPlace(averages, binding.TabLG4, 4, 2);
+                setSortedStatInPlace(averages, binding.TabLG5, 5, 2);
+            }
+            //total
+            setUnsortedStatInPlace(averages, binding.TabLGT, 2);
+
+            //head goals row
+            if (matchDif) {
+                setSortedStatInPlace(averages, binding.TabHG1, 1, 3);
+                setSortedStatInPlace(averages, binding.TabHG2, 2, 3);
+                setSortedStatInPlace(averages, binding.TabHG3, 3, 3);
+                setSortedStatInPlace(averages, binding.TabHG4, 4, 3);
+                setSortedStatInPlace(averages, binding.TabHG5, 5, 3);
+            }
+            //total
+            setUnsortedStatInPlace(averages,binding.TabHGT,3);
+        }
+        else {
+            if (matchDif) {
+                setTotalGoalsInPlace(averages, binding.TabLG1, 0);
+                setTotalGoalsInPlace(averages, binding.TabLG2, 1);
+                setTotalGoalsInPlace(averages, binding.TabLG3, 2);
+                setTotalGoalsInPlace(averages, binding.TabLG4, 3);
+                setTotalGoalsInPlace(averages, binding.TabLG5, 4);
+            }
+            //total
+            setTotalGoalsInPlace(averages, binding.TabLGT, 5);
+        }
+    }
+
+    private void fillAssists(boolean averages){
+        boolean matchDif = checks[5];
+        if (matchDif) {
+            setSortedStatInPlace(averages, binding.TabAs1, 1, 4);
+            setSortedStatInPlace(averages, binding.tabAs2, 2, 4);
+            setSortedStatInPlace(averages, binding.tabAs3, 3, 4);
+            setSortedStatInPlace(averages, binding.tabAs4, 4, 4);
+            setSortedStatInPlace(averages, binding.tabAs5, 5, 4);
+        }
+        //total
         setUnsortedStatInPlace(averages,binding.TabAsT,4);
+    }
 
+    private void fillPenalties(boolean averages){
+        if (checks[4]){//sort by side
+            setUnsortedStatInPlace(averages,binding.TabRPMd,5);
+            setUnsortedStatInPlace(averages,binding.TabLPMd,6);
+            setUnsortedStatInPlace(averages,binding.TabRPMs,7);
+            setUnsortedStatInPlace(averages,binding.TabLPMs,8);
+        }
+        else {
+            setTotalPensInPlace(averages);
+        }
 
-        //penalties table
-        setUnsortedStatInPlace(averages,binding.TabRPMd,5);
-        setUnsortedStatInPlace(averages,binding.TabLPMd,6);
-        setUnsortedStatInPlace(averages,binding.TabRPMs,7);
-        setUnsortedStatInPlace(averages,binding.TabLPMs,8);
     }
 
     private void setSortedStatInPlace(boolean averages, TextView view, int matchDif, int col){
@@ -274,10 +340,29 @@ public class ShowStatsContFragment extends Fragment {
         view.setText(text);
     }
 
+    private void setTotalGoalsInPlace(boolean averages, TextView view, int ind){
+        String text = (averages) ? getString(R.string.float_holder, performDivision(totalGoals[ind],totalNumOfMatches)) :
+                getString(R.string.int_holder, totalGoals[ind]);
+        view.setText(text);
+    }
+
+    private void setTotalPensInPlace(boolean averages){
+        String textMade = (averages) ? getString(R.string.float_holder, performDivision(totalMadePens, totalNumOfMatches)) :
+                getString(R.string.int_holder, totalMadePens);
+        String textMissed = (averages) ? getString(R.string.float_holder, performDivision(totalMissedPens, totalNumOfMatches)) :
+                getString(R.string.int_holder, totalMissedPens);
+        binding.TabRPMd.setText(textMade);
+        binding.TabRPMs.setText(textMissed);
+    }
+
     private void setUnsortedStatInPlace(boolean averages, TextView view, int col){
         String text = (averages) ? getString(R.string.float_holder, statsAvgUnsorted[col]) :
                 getString(R.string.int_holder, statsTotUnsorted[col]);
 
         view.setText(text);
+    }
+
+    private double performDivision(int dividend, int divisor){
+        return (divisor == 0) ? 0.0 : ((double) dividend) / ((double) divisor);
     }
 }

@@ -31,7 +31,7 @@
     <string name="l_penalties_missed">Penalties Missed to the Goal\'s Left Side</string>
     <string name="choose_stats">Please choose which stats<br /> you\'d like to see:</string>
     <string name="show_totals">Show Totals</string>
-    <string name="show_averages">Show Averages</string>
+    <string name="show_averages">Show Average <br />Per Match</string>
     <string name="show_stats">Show stats</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="feature_not_yet">"This feature hasn\'t been developed yet, do not let Neta peek!"</string>
@@ -52,7 +52,7 @@
     <string name="made">Made</string>
     <string name="missed">Missed</string>
     <string name="int_holder">%d</string>
-    <string name="float_holder">%f</string>
+    <string name="float_holder">%.2f</string>
 
 
 </resources>
