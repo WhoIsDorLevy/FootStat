@@ -6,8 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AppDB extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
+    public static final int NUM_OF_COLS = 9;
     public static final String DATABASE_NAME = "sample_database";
-    public static final String MATCHES_TABLE_NAME = "matches";
+    public static final String MATCHES_TABLE_NAME = "statsDB";
     public static final String COLUMN_ID = "id";
     public static final String MATCH_DIFFICULTY_TABLE_NAME = "matchDifficulty";
     public static final String R_GOALS_TABLE_NAME = "rGoals";
@@ -28,7 +29,7 @@ public class AppDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + "(\n" +
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
                 COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT,\n" +
                 MATCH_DIFFICULTY_TABLE_NAME +" INTEGER NOT NULL,\n" +
                 R_GOALS_TABLE_NAME + " integer NOT NULL,\n" +

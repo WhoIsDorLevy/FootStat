@@ -86,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public AppDB getDb(){
+        if (db == null){
+            db = new AppDB(this);
+        }
+
         return db;
     }
     @Override

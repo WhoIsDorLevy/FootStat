@@ -18,6 +18,7 @@ public class FirstFragment extends Fragment {
 
     private FragmentFirstBinding binding;
     protected static Connection conn;
+    private AppDB db;
 
     @Override
     public View onCreateView(
@@ -25,6 +26,8 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 //        setConnection();
+
+        db = new AppDB(getActivity());
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -66,6 +69,9 @@ public class FirstFragment extends Fragment {
                 System.exit(0);
             }
         });
+    }
+    public AppDB getDb(){
+        return db;
     }
 
     @Override

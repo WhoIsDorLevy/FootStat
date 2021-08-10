@@ -3,12 +3,15 @@ package com.example.statsapp;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,12 +21,26 @@ import com.example.statsapp.databinding.FragmentSecondBinding;
 
 import java.util.HashMap;
 
+import static com.example.statsapp.AppDB.ASSISTS_TABLE_NAME;
+import static com.example.statsapp.AppDB.COLUMN_ID;
+import static com.example.statsapp.AppDB.H_GOALS_TABLE_NAME;
+import static com.example.statsapp.AppDB.L_GOALS_TABLE_NAME;
+import static com.example.statsapp.AppDB.L_PENALTIES_MADE_TABLE_NAME;
+import static com.example.statsapp.AppDB.L_PENALTIES_MISSED_TABLE_NAME;
+import static com.example.statsapp.AppDB.MATCHES_TABLE_NAME;
+import static com.example.statsapp.AppDB.MATCH_DIFFICULTY_TABLE_NAME;
+import static com.example.statsapp.AppDB.R_GOALS_TABLE_NAME;
+import static com.example.statsapp.AppDB.R_PENALTIES_MADE_TABLE_NAME;
+import static com.example.statsapp.AppDB.R_PENALTIES_MISSED_TABLE_NAME;
+
 public class SecondFragment extends Fragment {
 
     private FragmentSecondBinding binding;
     private SQLiteDatabase db;
     private String matchDifVal, rGoalsVal, lGoalsVal, hGoalsVal, assistsVal,
             rPenaltiesMadeVal, lPenaltiesMadeVal, rPenaltiesMissedVal, lPenaltiesMissedVal;
+    private EditText[] editTexts;
+    private boolean[] isValid;
     private HashMap<EditText, String> inputs;// {title, <text input, value>}
     private HashMap<String, EditText> tableNameToEditText;//
 
@@ -32,12 +49,29 @@ public class SecondFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        MainActivity activity = (MainActivity) getActivity();
-        db = activity.getDb().getWritableDatabase();
+        setDB();
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
+
+    private void setDB(){
+        MainActivity activity = (MainActivity) getActivity();
+        db = activity.getDb().getWritableDatabase();
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
+                COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT,\n" +
+                MATCH_DIFFICULTY_TABLE_NAME +" INTEGER NOT NULL,\n" +
+                R_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
+                L_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
+                H_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
+                ASSISTS_TABLE_NAME + " integer NOT NULL,\n" +
+                R_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
+                L_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
+                R_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL,\n" +
+                L_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL" +
+                ");");
+    }
+
     private void initMaps(){
         inputs = new HashMap<>();
         //inputs
@@ -75,6 +109,7 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
+        setEditTexts();
         binding.buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +117,83 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
+
+    }
+
+    private void setEditTexts(){
+        isValid = new boolean[9];
+
+        editTexts = new EditText[]{binding.matchDifEditText, binding.RGoalsEditText,
+                binding.LGoalsEditText, binding.HGoalsEditText, binding.AssistsEditText,
+                binding.RPenaltiesMadeEditText, binding.LPenaltiesMadeEditText,
+                binding.RPenaltiesMissedEditText, binding.LPenaltiesMissedEditText};
+
+        binding.matchDifEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String input = binding.matchDifEditText.getText().toString();
+                if (checkValidNumber(input) && checkNumberInRange(input)){
+                    isValid[0] = true;
+                }
+                else {
+                    binding.matchDifEditText.setError("Must be a valid number between 1-5");
+                    isValid[0] = false;
+                }
+                checkValidity();
+            }
+        });
+
+        for (int ind = 1; ind < editTexts.length; ind++){
+            int finalInd = ind;
+            isValid[ind] = true;
+            editTexts[ind].addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    String input = editTexts[finalInd].getText().toString();
+                    if (!checkValidNumber(input)){
+                        editTexts[finalInd].setError("Must be a valid and positive number, or empty");
+                        isValid[finalInd] = false;
+                    }
+                    else {
+                        isValid[finalInd] = true;
+                    }
+                    checkValidity();
+                }
+            });
+        }
+    }
+
+    private void checkValidity(){
+        boolean toEnable = true;
+        for (boolean valid : isValid){
+            toEnable &= valid;
+        }
+        binding.buttonEnter.setEnabled(toEnable);
+    }
+
+    private boolean checkNumberInRange(String str){
+        int num = (str.isEmpty()) ? 0 : Integer.parseInt(str);
+        return 1 <= num & num <= 5;
+    }
+
+    private boolean checkValidNumber(String str){
+        if (str.isEmpty()){
+            return true;
+        }
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e){
+            return false;
+        }
     }
 
     private boolean isEmptyEditText(EditText ed){

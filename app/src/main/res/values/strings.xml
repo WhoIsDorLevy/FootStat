@@ -51,6 +51,8 @@
     <string name="header_other">Goals: <br />Header/Other</string>
     <string name="made">Made</string>
     <string name="missed">Missed</string>
+    <string name="int_holder">%d</string>
+    <string name="float_holder">%f</string>
 
 
 </resources>
