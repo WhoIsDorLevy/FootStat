@@ -37,12 +37,11 @@
     <string name="feature_not_yet">"This feature hasn\'t been developed yet, do not let Neta peek!"</string>
     <string name="no_settings">There are no settings</string>
     <string name="home">Home</string>
-    <string name="_1">1</string>
-    <string name="_2">2</string>
-    <string name="_3">3</string>
-    <string name="_4">4</string>
-    <string name="_5">5</string>
-    <string name="_6">6</string>
+    <string name="_1">      1      </string>
+    <string name="_2">      2      </string>
+    <string name="_3">      3      </string>
+    <string name="_4">      4      </string>
+    <string name="_5">      5      </string>
     <string name="total">Total</string>
     <string name="goals_right">Goals:<br /> Right</string>
     <string name="goals_left">Goals:<br /> Left</string>

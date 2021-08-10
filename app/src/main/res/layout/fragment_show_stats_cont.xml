@@ -58,10 +58,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/match_dif_show_stats"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -71,10 +72,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/_1"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -84,10 +86,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/_2"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -97,10 +100,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/_3"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -110,10 +114,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/_4"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -123,10 +128,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/_5"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -136,10 +142,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/total"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </TableRow>
@@ -159,10 +166,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/goals_right"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -247,10 +255,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/goals_left"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -335,10 +344,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/header_other"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -423,10 +433,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="1"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/assists"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -513,7 +524,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.672">
+        app:layout_constraintVertical_bias="0.692">
 
         <TableRow
             android:id="@+id/PenTabHeadRow"
@@ -529,10 +540,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="0"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/penalties"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -542,10 +554,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="0"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/made"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -555,10 +568,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="0"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/missed"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -578,10 +592,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="0"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/right"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -622,10 +637,11 @@
                 android:layout_height="match_parent"
                 android:layout_column="0"
                 android:layout_margin="1dp"
-                android:background="@color/background_color3"
+                android:background="@color/button_color"
                 android:gravity="center"
                 android:text="@string/left"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
