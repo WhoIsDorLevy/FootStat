@@ -2,7 +2,7 @@
     <string name="app_name">Stats App</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">TindeRegel</string>
+    <string name="first_fragment_label">StatsApp</string>
     <string name="second_fragment_label">Insert Match</string>
     <string name="show_stats_fragment_label">Show Stats</string>
     <string name="exit">Exit</string>
@@ -12,7 +12,7 @@
     <string name="enter_stats_textview">"Please enter the\nfollowing stats:"</string>
     <string name="enter_button_text">Enter</string>
     <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="welcome">Welcome to TindeRegel!</string>
+    <string name="welcome">Welcome to StatsApp!</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="match_dif">Match Difficulty (1 – 5)</string>
     <string name="match_dif_show_stats">"Match\nDifficulty"</string>

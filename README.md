@@ -1,2 +1,3 @@
 # StatsApp
-An app for android, that can store your football matches statistics in a MySQL database.
+My first app for android.
+This app implements a persistent database which can store football matches statistics.
