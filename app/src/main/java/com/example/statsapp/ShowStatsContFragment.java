@@ -74,6 +74,11 @@ public class ShowStatsContFragment extends Fragment {
                 .navigate(R.id.action_showStatsContFragment_to_FirstFragment));
     }
 
+//    private void insertNewLine(TextView view){
+//        String text = view.getText().toString();
+//        view.setText(text.replace("\\\n"));
+//    }
+
     private void setDB(MainActivity activity){
         db = activity.getDb().getReadableDatabase();
         db.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
