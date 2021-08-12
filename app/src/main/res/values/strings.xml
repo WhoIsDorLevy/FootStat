@@ -54,6 +54,7 @@
     <string name="int_holder">%d</string>
     <string name="float_holder">%.2f</string>
     <string name="match_added">Match added successfully!</string>
-
-
+    <string name="select_date">Select Date</string>
+    <string name="date_holder">%02d/%02d/%04d</string>
+    <string name="please_choose_date">Please choose the match date!</string>
 </resources>

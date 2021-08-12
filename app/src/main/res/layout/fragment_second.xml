@@ -14,7 +14,7 @@
         android:ems="10"
         android:hint="@string/h_goals"
         android:inputType="numberDecimal"
-        android:textColorHint="@color/black"
+
         android:backgroundTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

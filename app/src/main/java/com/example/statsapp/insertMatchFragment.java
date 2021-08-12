@@ -1,5 +1,7 @@
 package com.example.statsapp;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,6 +11,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,17 +22,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.statsapp.databinding.FragmentInsertMatchBinding;
 
-import static com.example.statsapp.AppDB.ASSISTS_TABLE_NAME;
-import static com.example.statsapp.AppDB.COLUMN_ID;
-import static com.example.statsapp.AppDB.H_GOALS_TABLE_NAME;
-import static com.example.statsapp.AppDB.L_GOALS_TABLE_NAME;
-import static com.example.statsapp.AppDB.L_PENALTIES_MADE_TABLE_NAME;
-import static com.example.statsapp.AppDB.L_PENALTIES_MISSED_TABLE_NAME;
-import static com.example.statsapp.AppDB.MATCHES_TABLE_NAME;
-import static com.example.statsapp.AppDB.MATCH_DIFFICULTY_TABLE_NAME;
-import static com.example.statsapp.AppDB.R_GOALS_TABLE_NAME;
-import static com.example.statsapp.AppDB.R_PENALTIES_MADE_TABLE_NAME;
-import static com.example.statsapp.AppDB.R_PENALTIES_MISSED_TABLE_NAME;
+import java.util.Calendar;
+
 
 public class insertMatchFragment extends Fragment {
 
@@ -38,44 +33,38 @@ public class insertMatchFragment extends Fragment {
             rPenaltiesMadeVal, lPenaltiesMadeVal, rPenaltiesMissedVal, lPenaltiesMissedVal;
     private EditText[] editTexts;
     private boolean[] isValid;
+    private String date;
+
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        setDB();
-
+        db = AppDB.getInstance(getActivity()).getDatabase(true);
+        date = null;
         binding = FragmentInsertMatchBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
 
-    private void setDB(){
-        MainActivity activity = (MainActivity) getActivity();
-        db = activity.getDb().getWritableDatabase();
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
-                COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT,\n" +
-                MATCH_DIFFICULTY_TABLE_NAME +" INTEGER NOT NULL,\n" +
-                R_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                L_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                H_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                ASSISTS_TABLE_NAME + " integer NOT NULL,\n" +
-                R_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
-                L_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
-                R_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL,\n" +
-                L_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL" +
-                ");");
-    }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Activity activity = getActivity();
+        binding.linearLay.setOnTouchListener((view1, motionEvent) -> hideKeyboard(activity) );
+        binding.SelectDateTextView.setOnClickListener(this::showDatePickerDialog);
         binding.buttonEnter.setOnClickListener(view12 -> {
-            getInputs();
-            uploadStats();
-            Toast.makeText(getActivity(), R.string.match_added, Toast.LENGTH_LONG).show();
-            NavHostFragment.findNavController(insertMatchFragment.this)
-                    .navigate(R.id.action_insertMatchFragment_to_FirstFragment);
+            if (date == null){
+                Toast.makeText(activity, R.string.match_added, Toast.LENGTH_LONG).show();
+            }
+            else {
+                getInputs();
+                uploadStats();
+                Toast.makeText(activity, R.string.match_added, Toast.LENGTH_LONG).show();
+                NavHostFragment.findNavController(insertMatchFragment.this)
+                        .navigate(R.id.action_insertMatchFragment_to_FirstFragment);
+            }
         });
 
         setEditTexts();
@@ -136,7 +125,7 @@ public class insertMatchFragment extends Fragment {
     }
 
     private void checkValidity(){
-        boolean toEnable = true;
+        boolean toEnable = date != null;
         for (boolean valid : isValid){
             toEnable &= valid;
         }
@@ -181,16 +170,16 @@ public class insertMatchFragment extends Fragment {
 
     private void uploadStats(){
         ContentValues values = new ContentValues();
-
-        values.put(AppDB.MATCH_DIFFICULTY_TABLE_NAME, matchDifVal);
-        values.put(AppDB.R_GOALS_TABLE_NAME, rGoalsVal);
-        values.put(AppDB.L_GOALS_TABLE_NAME, lGoalsVal);
-        values.put(AppDB.H_GOALS_TABLE_NAME, hGoalsVal);
-        values.put(AppDB.ASSISTS_TABLE_NAME, assistsVal);
-        values.put(AppDB.R_PENALTIES_MADE_TABLE_NAME, rPenaltiesMadeVal);
-        values.put(AppDB.L_PENALTIES_MADE_TABLE_NAME, lPenaltiesMadeVal);
-        values.put(AppDB.R_PENALTIES_MISSED_TABLE_NAME, rPenaltiesMissedVal);
-        values.put(AppDB.L_PENALTIES_MISSED_TABLE_NAME, lPenaltiesMissedVal);
+        values.put(AppDB.DATE, date);
+        values.put(AppDB.MATCH_DIFFICULTY, matchDifVal);
+        values.put(AppDB.R_GOALS, rGoalsVal);
+        values.put(AppDB.L_GOALS, lGoalsVal);
+        values.put(AppDB.H_GOALS, hGoalsVal);
+        values.put(AppDB.ASSISTS, assistsVal);
+        values.put(AppDB.R_PENALTIES_MADE, rPenaltiesMadeVal);
+        values.put(AppDB.L_PENALTIES_MADE, lPenaltiesMadeVal);
+        values.put(AppDB.R_PENALTIES_MISSED, rPenaltiesMissedVal);
+        values.put(AppDB.L_PENALTIES_MISSED, lPenaltiesMissedVal);
 
         db.insert(AppDB.MATCHES_TABLE_NAME, null, values);
 
@@ -198,12 +187,43 @@ public class insertMatchFragment extends Fragment {
 
     }
 
+    private void showDatePickerDialog(View view){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getActivity(),
+                this::onDateSet,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    private void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
+        month++;//Jenuary is 0
+        date = getString(R.string.date_holder,dayOfMonth,month,year);
+        binding.SelectDateTextView.setText(date);
+    }
+
+    private boolean hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        return false;
+    }
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
         db.close();
     }
+
 
 
 }

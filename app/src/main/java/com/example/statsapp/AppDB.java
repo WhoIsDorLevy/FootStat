@@ -8,44 +8,69 @@ public class AppDB extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
     public static final int NUM_OF_COLS = 9;
     public static final String DATABASE_NAME = "sample_database";
-    public static final String MATCHES_TABLE_NAME = "statsDB";
+    public static String MATCHES_TABLE_NAME = "matchesTab";
+    public static String MATCH_DIFF_TABLE_NAME = "matchDifTab";
+    public static String GOALS_TABLE_NAME = "goalsTab";
+    public static String PENALTIES_TABLE_NAME = "penaltiesTab";
     public static final String COLUMN_ID = "id";
-    public static final String MATCH_DIFFICULTY_TABLE_NAME = "matchDifficulty";
-    public static final String R_GOALS_TABLE_NAME = "rGoals";
-    public static final String L_GOALS_TABLE_NAME = "lGoals";
-    public static final String H_GOALS_TABLE_NAME = "hGoals";
-    public static final String ASSISTS_TABLE_NAME = "assists";
-    public static final String R_PENALTIES_MADE_TABLE_NAME = "rPenaltiesMade";
-    public static final String L_PENALTIES_MADE_TABLE_NAME = "lPenaltiesMade";
-    public static final String R_PENALTIES_MISSED_TABLE_NAME = "rPenaltiesMissed";
-    public static final String L_PENALTIES_MISSED_TABLE_NAME = "lPenaltiesMissed";
+    public static final String DATE = "dayOfMatch";
+    public static final String MATCH_DIFFICULTY = "matchDifficulty";
+    public static final String R_GOALS = "rGoals";
+    public static final String L_GOALS = "lGoals";
+    public static final String H_GOALS = "hGoals";
+    public static final String ASSISTS = "assists";
+    public static final String R_PENALTIES_MADE = "rPenaltiesMade";
+    public static final String L_PENALTIES_MADE = "lPenaltiesMade";
+    public static final String R_PENALTIES_MISSED = "rPenaltiesMissed";
+    public static final String L_PENALTIES_MISSED = "lPenaltiesMissed";
+
+    private boolean createdTable = false;
+    private static AppDB instance = null;
 
 
 
-
-    public AppDB(Context context) {
+    private AppDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
-                COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT,\n" +
-                MATCH_DIFFICULTY_TABLE_NAME +" INTEGER NOT NULL,\n" +
-                R_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                L_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                H_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                ASSISTS_TABLE_NAME + " integer NOT NULL,\n" +
-                R_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
-                L_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
-                R_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL,\n" +
-                L_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL" +
-                ");");
+        if (!createdTable) {
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
+                    COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT,\n" +
+                    DATE + " date NOT NULL,\n" +
+                    MATCH_DIFFICULTY + " integer NOT NULL,\n" +
+                    R_GOALS + " integer NOT NULL,\n" +
+                    L_GOALS + " integer NOT NULL,\n" +
+                    H_GOALS + " integer NOT NULL,\n" +
+                    ASSISTS + " integer NOT NULL,\n" +
+                    R_PENALTIES_MADE + " integer NOT NULL,\n" +
+                    L_PENALTIES_MADE + " integer NOT NULL,\n" +
+                    R_PENALTIES_MISSED + " integer NOT NULL,\n" +
+                    L_PENALTIES_MISSED + " integer NOT NULL" +
+                    ");");
+            createdTable = true;
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MATCHES_TABLE_NAME);
         onCreate(sqLiteDatabase);
+    }
+
+    public static AppDB getInstance(Context context){
+        if (instance == null){
+            instance = new AppDB(context);
+        }
+        return instance;
+    }
+
+
+    public SQLiteDatabase getDatabase(boolean writable){//false for readable
+        SQLiteDatabase output = (writable) ? super.getWritableDatabase() :
+                super.getReadableDatabase();
+        onCreate(output);
+        return output;
     }
 }

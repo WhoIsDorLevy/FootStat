@@ -6,15 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".insertMatchFragment"
     android:background="@color/background_color3">
+
     <LinearLayout
+        android:id="@+id/linearLay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
         android:background="@color/background_color3"
         android:descendantFocusability="beforeDescendants"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
@@ -29,111 +31,142 @@
             android:layout_width="match_parent"
             android:layout_height="16dp" />
 
+        <TextView
+            android:id="@+id/SelectDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:gravity="center"
+            android:hint="@string/select_date"
+            android:textColorHint="@color/black"
+            android:textSize="22sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
         <EditText
             android:id="@+id/matchDifEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/match_dif"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="4dp" />
+            android:layout_height="2dp" />
+
         <EditText
             android:id="@+id/RGoalsEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/r_goals"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="4dp" />
+            android:layout_height="2dp" />
+
         <EditText
             android:id="@+id/LGoalsEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/l_goals"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="4dp" />
+            android:layout_height="2dp" />
+
         <EditText
             android:id="@+id/HGoalsEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/h_goals"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="4dp" />
+            android:layout_height="2dp" />
+
         <EditText
             android:id="@+id/AssistsEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/assists"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="4dp" />
+            android:layout_height="2dp" />
+
         <EditText
             android:id="@+id/RPenaltiesMadeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/r_penalties_made"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="4dp" />
+            android:layout_height="2dp" />
+
         <EditText
             android:id="@+id/LPenaltiesMadeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/l_penalties_made"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="4dp" />
+            android:layout_height="2dp" />
+
         <EditText
             android:id="@+id/RPenaltiesMissedEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/r_penalties_missed"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
-            android:layout_height="4dp" />
+            android:layout_height="2dp" />
+
         <EditText
             android:id="@+id/LPenaltiesMissedEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"
             android:hint="@string/l_penalties_missed"
-            android:textColorHint="@color/black"/>
+            android:inputType="numberDecimal"
+            android:textColorHint="@color/black" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="12dp" />
@@ -143,8 +176,8 @@
             android:layout_width="100dp"
             android:layout_height="48dp"
             android:enabled="false"
-            android:text="@string/enter_button_text"
             android:paddingStart="80dp"
+            android:text="@string/enter_button_text"
             app:backgroundTint="@color/button_color" />
 
     </LinearLayout>

@@ -9,7 +9,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
@@ -17,9 +16,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.statsapp.databinding.FragmentSecondBinding;
-
-
-import static com.example.statsapp.AppDB.*;
 
 public class SecondFragment extends Fragment {
 
@@ -35,29 +31,12 @@ public class SecondFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        setDB();
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
 
-    private void setDB(){
-        MainActivity activity = (MainActivity) getActivity();
-        db = activity.getDb().getWritableDatabase();
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
-                COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT,\n" +
-                MATCH_DIFFICULTY_TABLE_NAME +" INTEGER NOT NULL,\n" +
-                R_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                L_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                H_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                ASSISTS_TABLE_NAME + " integer NOT NULL,\n" +
-                R_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
-                L_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
-                R_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL,\n" +
-                L_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL" +
-                ");");
-    }
+
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -174,15 +153,15 @@ public class SecondFragment extends Fragment {
     private void uploadStats(){
         ContentValues values = new ContentValues();
 
-        values.put(AppDB.MATCH_DIFFICULTY_TABLE_NAME, matchDifVal);
-        values.put(AppDB.R_GOALS_TABLE_NAME, rGoalsVal);
-        values.put(AppDB.L_GOALS_TABLE_NAME, lGoalsVal);
-        values.put(AppDB.H_GOALS_TABLE_NAME, hGoalsVal);
-        values.put(AppDB.ASSISTS_TABLE_NAME, assistsVal);
-        values.put(AppDB.R_PENALTIES_MADE_TABLE_NAME, rPenaltiesMadeVal);
-        values.put(AppDB.L_PENALTIES_MADE_TABLE_NAME, lPenaltiesMadeVal);
-        values.put(AppDB.R_PENALTIES_MISSED_TABLE_NAME, rPenaltiesMissedVal);
-        values.put(AppDB.L_PENALTIES_MISSED_TABLE_NAME, lPenaltiesMissedVal);
+        values.put(AppDB.MATCH_DIFFICULTY, matchDifVal);
+        values.put(AppDB.R_GOALS, rGoalsVal);
+        values.put(AppDB.L_GOALS, lGoalsVal);
+        values.put(AppDB.H_GOALS, hGoalsVal);
+        values.put(AppDB.ASSISTS, assistsVal);
+        values.put(AppDB.R_PENALTIES_MADE, rPenaltiesMadeVal);
+        values.put(AppDB.L_PENALTIES_MADE, lPenaltiesMadeVal);
+        values.put(AppDB.R_PENALTIES_MISSED, rPenaltiesMissedVal);
+        values.put(AppDB.L_PENALTIES_MISSED, lPenaltiesMissedVal);
 
         db.insert(AppDB.MATCHES_TABLE_NAME, null, values);
 

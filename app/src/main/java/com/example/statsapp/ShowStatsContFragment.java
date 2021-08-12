@@ -15,8 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.Toolbar;
-
 import com.example.statsapp.databinding.FragmentShowStatsContBinding;
 
 import static com.example.statsapp.AppDB.*;
@@ -42,8 +40,7 @@ public class ShowStatsContFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        MainActivity activity = (MainActivity) getActivity();
-        setDB(activity);
+        db = AppDB.getInstance(getActivity()).getDatabase(false);
         binding = FragmentShowStatsContBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -72,26 +69,6 @@ public class ShowStatsContFragment extends Fragment {
                 .navigate(R.id.action_showStatsContFragment_to_FirstFragment));
     }
 
-//    private void insertNewLine(TextView view){
-//        String text = view.getText().toString();
-//        view.setText(text.replace("\\\n"));
-//    }
-
-    private void setDB(MainActivity activity){
-        db = activity.getDb().getReadableDatabase();
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
-                COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT,\n" +
-                MATCH_DIFFICULTY_TABLE_NAME +" INTEGER NOT NULL,\n" +
-                R_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                L_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                H_GOALS_TABLE_NAME + " integer NOT NULL,\n" +
-                ASSISTS_TABLE_NAME + " integer NOT NULL,\n" +
-                R_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
-                L_PENALTIES_MADE_TABLE_NAME + " integer NOT NULL,\n" +
-                R_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL,\n" +
-                L_PENALTIES_MISSED_TABLE_NAME + " integer NOT NULL" +
-                ");");
-    }
 
     private void filterTable(){
         if (filterFirstTable(checks[0], checks[2])) {
@@ -180,10 +157,10 @@ public class ShowStatsContFragment extends Fragment {
     }
 
     private void setStats(){
-        String[] projection = {AppDB.MATCH_DIFFICULTY_TABLE_NAME, AppDB.R_GOALS_TABLE_NAME,
-                AppDB.L_GOALS_TABLE_NAME,AppDB.H_GOALS_TABLE_NAME,AppDB.ASSISTS_TABLE_NAME,
-                AppDB.R_PENALTIES_MADE_TABLE_NAME,AppDB.L_PENALTIES_MADE_TABLE_NAME,
-                AppDB.R_PENALTIES_MISSED_TABLE_NAME,AppDB.L_PENALTIES_MISSED_TABLE_NAME};
+        String[] projection = {AppDB.MATCH_DIFFICULTY, AppDB.R_GOALS,
+                AppDB.L_GOALS,AppDB.H_GOALS,AppDB.ASSISTS,
+                AppDB.R_PENALTIES_MADE,AppDB.L_PENALTIES_MADE,
+                AppDB.R_PENALTIES_MISSED,AppDB.L_PENALTIES_MISSED};
 
         Cursor cursor = db.query(
                 MATCHES_TABLE_NAME,
@@ -197,7 +174,7 @@ public class ShowStatsContFragment extends Fragment {
 
         //get totals sorted
         while (cursor.moveToNext()){
-            int matchDifInd = cursor.getColumnIndex(AppDB.MATCH_DIFFICULTY_TABLE_NAME);
+            int matchDifInd = cursor.getColumnIndex(AppDB.MATCH_DIFFICULTY);
             int matchDif = cursor.getInt(matchDifInd);
             statsTotSorted[matchDif - 1][0]++;
             for (int i = 1; i < AppDB.NUM_OF_COLS; i++){
