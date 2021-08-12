@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:screenOrientation="portrait"
-    android:windowSoftInputMode="stateAlwaysHidden"
+    android:windowSoftInputMode="stateHidden|adjustResize"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout

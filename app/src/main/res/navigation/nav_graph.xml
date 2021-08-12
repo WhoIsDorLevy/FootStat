@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_ShowStatsFragment"
             app:destination="@id/showStatsFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_insertMatchFragment"
+            app:destination="@id/insertMatchFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -31,7 +34,7 @@
     <fragment
         android:id="@+id/showStatsFragment"
         android:name="com.example.statsapp.ShowStatsFragment"
-        android:label="fragment_show_stats"
+        android:label="@string/show_stats_fragment_label"
         tools:layout="@layout/fragment_show_stats" >
         <action
             android:id="@+id/action_showStatsFragment_to_showStatsContFragment"
@@ -40,7 +43,7 @@
     <fragment
         android:id="@+id/showStatsContFragment"
         android:name="com.example.statsapp.ShowStatsContFragment"
-        android:label="fragment_show_stats_cont"
+        android:label="@string/show_stats_fragment_label"
         tools:layout="@layout/fragment_show_stats_cont" >
         <action
             android:id="@+id/action_showStatsContFragment_to_FirstFragment"
@@ -48,5 +51,14 @@
         <argument
             android:name="checks"
             app:argType="boolean[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/insertMatchFragment"
+        android:name="com.example.statsapp.insertMatchFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_insert_match" >
+        <action
+            android:id="@+id/action_insertMatchFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

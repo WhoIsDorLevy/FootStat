@@ -45,8 +45,6 @@ public class ShowStatsContFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
         setDB(activity);
         binding = FragmentShowStatsContBinding.inflate(inflater, container, false);
-        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.show_stats_fragment_label);
         return binding.getRoot();
     }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

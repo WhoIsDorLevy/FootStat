@@ -8,6 +8,7 @@
     <string name="exit">Exit</string>
     <string name="previous">Previous</string>
     <string name="cancel">Cancel</string>
+    <string name="clear">Clear</string>
     <string name="insert_match_textview">Insert Match</string>
     <string name="enter_stats_textview">"Please enter the\nfollowing stats:"</string>
     <string name="enter_button_text">Enter</string>
@@ -52,6 +53,7 @@
     <string name="missed">Missed</string>
     <string name="int_holder">%d</string>
     <string name="float_holder">%.2f</string>
+    <string name="match_added">Match added successfully!</string>
 
 
 </resources>

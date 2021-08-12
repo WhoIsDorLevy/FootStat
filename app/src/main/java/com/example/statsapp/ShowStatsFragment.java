@@ -31,8 +31,6 @@ public class ShowStatsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentShowStatsBinding.inflate(inflater, container, false);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.show_stats_fragment_label);
         return binding.getRoot();
     }
 

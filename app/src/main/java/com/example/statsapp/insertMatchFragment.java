@@ -9,21 +9,30 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.statsapp.databinding.FragmentSecondBinding;
+import com.example.statsapp.databinding.FragmentInsertMatchBinding;
 
+import static com.example.statsapp.AppDB.ASSISTS_TABLE_NAME;
+import static com.example.statsapp.AppDB.COLUMN_ID;
+import static com.example.statsapp.AppDB.H_GOALS_TABLE_NAME;
+import static com.example.statsapp.AppDB.L_GOALS_TABLE_NAME;
+import static com.example.statsapp.AppDB.L_PENALTIES_MADE_TABLE_NAME;
+import static com.example.statsapp.AppDB.L_PENALTIES_MISSED_TABLE_NAME;
+import static com.example.statsapp.AppDB.MATCHES_TABLE_NAME;
+import static com.example.statsapp.AppDB.MATCH_DIFFICULTY_TABLE_NAME;
+import static com.example.statsapp.AppDB.R_GOALS_TABLE_NAME;
+import static com.example.statsapp.AppDB.R_PENALTIES_MADE_TABLE_NAME;
+import static com.example.statsapp.AppDB.R_PENALTIES_MISSED_TABLE_NAME;
 
-import static com.example.statsapp.AppDB.*;
+public class insertMatchFragment extends Fragment {
 
-public class SecondFragment extends Fragment {
-
-    private FragmentSecondBinding binding;
+    private FragmentInsertMatchBinding binding;
     private SQLiteDatabase db;
     private String matchDifVal, rGoalsVal, lGoalsVal, hGoalsVal, assistsVal,
             rPenaltiesMadeVal, lPenaltiesMadeVal, rPenaltiesMissedVal, lPenaltiesMissedVal;
@@ -36,8 +45,8 @@ public class SecondFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         setDB();
-        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
+
+        binding = FragmentInsertMatchBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -64,15 +73,14 @@ public class SecondFragment extends Fragment {
         binding.buttonEnter.setOnClickListener(view12 -> {
             getInputs();
             uploadStats();
-            NavHostFragment.findNavController(SecondFragment.this)
-                    .navigate(R.id.action_SecondFragment_to_FirstFragment);
+            Toast.makeText(getActivity(), R.string.match_added, Toast.LENGTH_LONG).show();
+            NavHostFragment.findNavController(insertMatchFragment.this)
+                    .navigate(R.id.action_insertMatchFragment_to_FirstFragment);
         });
 
         setEditTexts();
 
-        binding.buttonCancel.setOnClickListener(view1 ->
-                NavHostFragment.findNavController(SecondFragment.this)
-                .navigate(R.id.action_SecondFragment_to_FirstFragment));
+
 
     }
 
