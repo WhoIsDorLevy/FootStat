@@ -27,10 +27,6 @@
             android:textColor="@color/black"
             android:textSize="28sp" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="16dp" />
-
         <TextView
             android:id="@+id/SelectDateTextView"
             android:layout_width="wrap_content"
@@ -55,10 +51,6 @@
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
-
         <EditText
             android:id="@+id/RGoalsEditText"
             android:layout_width="match_parent"
@@ -68,10 +60,6 @@
             android:hint="@string/r_goals"
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
 
         <EditText
             android:id="@+id/LGoalsEditText"
@@ -83,10 +71,6 @@
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
-
         <EditText
             android:id="@+id/HGoalsEditText"
             android:layout_width="match_parent"
@@ -96,10 +80,6 @@
             android:hint="@string/h_goals"
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
 
         <EditText
             android:id="@+id/AssistsEditText"
@@ -111,10 +91,6 @@
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
-
         <EditText
             android:id="@+id/RPenaltiesMadeEditText"
             android:layout_width="match_parent"
@@ -124,10 +100,6 @@
             android:hint="@string/r_penalties_made"
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
 
         <EditText
             android:id="@+id/LPenaltiesMadeEditText"
@@ -139,10 +111,6 @@
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
-
         <EditText
             android:id="@+id/RPenaltiesMissedEditText"
             android:layout_width="match_parent"
@@ -153,10 +121,6 @@
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="2dp" />
-
         <EditText
             android:id="@+id/LPenaltiesMissedEditText"
             android:layout_width="match_parent"
@@ -166,10 +130,6 @@
             android:hint="@string/l_penalties_missed"
             android:inputType="numberDecimal"
             android:textColorHint="@color/black" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="12dp" />
 
         <Button
             android:id="@+id/button_enter"

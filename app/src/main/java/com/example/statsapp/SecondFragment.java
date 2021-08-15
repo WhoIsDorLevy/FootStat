@@ -163,7 +163,7 @@ public class SecondFragment extends Fragment {
         values.put(AppDB.R_PENALTIES_MISSED, rPenaltiesMissedVal);
         values.put(AppDB.L_PENALTIES_MISSED, lPenaltiesMissedVal);
 
-        db.insert(AppDB.MATCHES_TABLE_NAME, null, values);
+        db.insert(AppDB.TABLE_NAME, null, values);
 
 
 

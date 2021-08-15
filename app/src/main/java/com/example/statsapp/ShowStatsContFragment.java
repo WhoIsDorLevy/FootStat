@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.statsapp.databinding.FragmentShowStatsContBinding;
@@ -25,15 +26,7 @@ public class ShowStatsContFragment extends Fragment {
     private FragmentShowStatsContBinding binding;
     private boolean[] checks;
     private SQLiteDatabase db;
-    private int[][] statsTotSorted;
-    private double[][] statsAvgSorted;
-    private int[] statsTotUnsorted;
-    private double[] statsAvgUnsorted;
-    private int[] totalGoals;
-    private int totalMadePens;
-    private int totalMissedPens;
-    private int totalNumOfMatches;
-    private final int numOfMatchDifs = 5;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -47,12 +40,7 @@ public class ShowStatsContFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         checks = ShowStatsContFragmentArgs.fromBundle(getArguments()).getChecks();
-        statsTotSorted = new int[numOfMatchDifs][AppDB.NUM_OF_COLS ];//each table sorted by matchDif
-        statsAvgSorted = new double[numOfMatchDifs][AppDB.NUM_OF_COLS];
-        statsTotUnsorted = new int[AppDB.NUM_OF_COLS];
-        statsAvgUnsorted = new double[AppDB.NUM_OF_COLS];
-        setStats();
-        fillStatsToTable(false);
+        getAndFillStatsToTable(false);
         filterTable();
         binding.switch2.setOnCheckedChangeListener((compoundButton, b) -> {
             if (b){
@@ -61,7 +49,7 @@ public class ShowStatsContFragment extends Fragment {
             else {
                 binding.switch2.setText(R.string.show_totals);
             }
-            fillStatsToTable(b);
+            getAndFillStatsToTable(b);
         });
 
         binding.buttonHome.setOnClickListener(view1 ->
@@ -156,188 +144,129 @@ public class ShowStatsContFragment extends Fragment {
         ((ViewGroup) view.getParent()).removeView(view);
     }
 
-    private void setStats(){
-        String[] projection = {AppDB.MATCH_DIFFICULTY, AppDB.R_GOALS,
-                AppDB.L_GOALS,AppDB.H_GOALS,AppDB.ASSISTS,
-                AppDB.R_PENALTIES_MADE,AppDB.L_PENALTIES_MADE,
-                AppDB.R_PENALTIES_MISSED,AppDB.L_PENALTIES_MISSED};
+    private void getAndFillStatsToTable(boolean averages){
+        if (checks[0]){//goals
+            getAndFillGoals(averages);
+        }
+        if (checks[2]){//assists
+            getAndFillAssists(averages);
+        }
+        if (checks[3]){//penalties
+            getAndFillPenalties(averages);
+        }
+    }
+    private void getAndFillGoals(boolean averages){
+
+        if (checks[1]) {//sort by foot
+            getAndFillFirstTableRow(averages, binding.GoalsRow1, R_GOALS);
+            getAndFillFirstTableRow(averages, binding.GoalsRow2, L_GOALS);
+            getAndFillFirstTableRow(averages, binding.GoalsRow3, H_GOALS);
+
+        }
+        else {//don't sort by foot
+            getAndFillFirstTableRow(averages, binding.GoalsRow2, T_GOALS);
+        }
+
+    }
+    private void getAndFillAssists(boolean averages){
+        getAndFillFirstTableRow(averages, binding.AssistsRow, ASSISTS);
+    }
+
+    private void getAndFillPenalties(boolean averages){
+        if (checks[4]){//sort by side
+            getAndFillStat(averages, R_PENALTIES_MADE, 6, binding.TabRPMd);
+            getAndFillStat(averages, R_PENALTIES_MISSED, 6, binding.TabRPMs);
+            getAndFillStat(averages, L_PENALTIES_MADE, 6, binding.TabLPMd);
+            getAndFillStat(averages, L_PENALTIES_MISSED, 6, binding.TabLPMs);
+        }
+        else {//don't sort by side
+            getAndFillStat(averages, T_PENALTIES_MADE, 6, binding.TabRPMd);
+            getAndFillStat(averages, T_PENALTIES_MISSED, 6, binding.TabRPMs);
+        }
+    }
+
+    private void getAndFillFirstTableRow(boolean averages, TableRow row, String stat){
+        int numOfChildren = row.getChildCount();//num of cols
+        if (checks[5]) {//sort by matchDif
+            for (int i = 1; i < numOfChildren; i++) {//first col is headline, skip it
+                TextView view = (TextView) row.getChildAt(i);
+                getAndFillStat(averages, stat, i, view);
+            }
+        }
+        else {//don't sort by matchDif
+            TextView view = (TextView) row.getChildAt(numOfChildren - 1);
+            getAndFillStat(averages, stat, 6, view);
+        }
+    }
+
+
+
+    private void getAndFillStat(boolean averages, String stat, int matchDif, TextView view){
+        if (averages){
+            fillAvg(view, getAvgOf(stat, matchDif));
+        }
+        else {
+            fillSum(view, getSumOf(stat, matchDif));
+        }
+    }
+
+    private int getSumOf(String stat, int matchDif){
+        boolean totalGoals = stat.equals("totalGoals");
+        boolean totalPenaltiesMade = stat.equals("totalPenaltiesMade");
+        boolean totalPenaltiesMissed = stat.equals("totalPenaltiesMissed");
+
+        String select = totalGoals ? "SUM(" + R_GOALS + " + " + L_GOALS + " + " + H_GOALS + ")" :
+                totalPenaltiesMade ? "SUM(" + R_PENALTIES_MADE + " + " + L_PENALTIES_MADE + ")" :
+                        totalPenaltiesMissed ? "SUM(" + R_PENALTIES_MISSED + " + " + L_PENALTIES_MISSED + ")" :
+                                "SUM(" + stat + ")";
+        StringBuilder builder = new StringBuilder();
+        builder.append("SELECT ").append(select).append('\n').append("AS stat\n").append("FROM ").append(TABLE_NAME);
+        if (matchDif < 6){
+            builder.append('\n').append("WHERE ").append(MATCH_DIFFICULTY).append(" = ").append(matchDif);
+        }
+        builder.append(';');
+        Cursor cursor = db.rawQuery(builder.toString(), null);
+        cursor.moveToNext();
+        int output = cursor.getInt(0);
+        cursor.close();
+        return output;
+    }
+
+    private double getAvgOf(String stat, int matchDif){
+        boolean totalGoals = stat.equals("totalGoals");
+        boolean totalPenaltiesMade = stat.equals("totalPenaltiesMade");
+        boolean totalPenaltiesMissed = stat.equals("totalPenaltiesMissed");
+
+        String toWrap = totalGoals ? "AVG(" + R_GOALS + " + " + L_GOALS + " + " + H_GOALS + ")" :
+                totalPenaltiesMade ? "AVG(" + R_PENALTIES_MADE + " + " + L_PENALTIES_MADE + ")" :
+                        totalPenaltiesMissed ? "AVG(" + R_PENALTIES_MISSED + " + " + L_PENALTIES_MISSED + ")" :
+                                "AVG(" + stat + ")";
+
+        String[] projection = {toWrap};
+        String selection = (matchDif == 5) ? null : MATCH_DIFFICULTY + " = " + matchDif;
 
         Cursor cursor = db.query(
-                MATCHES_TABLE_NAME,
+                TABLE_NAME,
                 projection,
+                selection,
                 null,
                 null,
                 null,
-                null,
-                null
-        );
+                null);
 
-        //get totals sorted
-        while (cursor.moveToNext()){
-            int matchDifInd = cursor.getColumnIndex(AppDB.MATCH_DIFFICULTY);
-            int matchDif = cursor.getInt(matchDifInd);
-            statsTotSorted[matchDif - 1][0]++;
-            for (int i = 1; i < AppDB.NUM_OF_COLS; i++){
-                statsTotSorted[matchDif - 1][i] += cursor.getInt(i);
-            }
-        }
-
-        //calculate totals unsorted
-        for (int i = 0; i < numOfMatchDifs; i++){
-            for (int j = 0; j < AppDB.NUM_OF_COLS; j++) {
-                statsTotUnsorted[j] += statsTotSorted[i][j];
-            }
-        }
-
-        //calculate averages sorted
-        for (int i = 0; i < statsAvgSorted.length; i++){
-            statsAvgSorted[i][0] = performDivision(statsTotSorted[i][0], statsTotUnsorted[0]);
-            for (int j = 1; j < AppDB.NUM_OF_COLS; j++){
-                statsAvgSorted[i][j] = performDivision(statsTotSorted[i][j], statsTotSorted[i][0]);
-            }
-        }
-
-        //calculate averages unsorted
-        totalNumOfMatches = cursor.getCount();
-        for (int i = 0; i < AppDB.NUM_OF_COLS; i++){
-            statsAvgUnsorted[i] = performDivision(statsTotUnsorted[i], totalNumOfMatches);
-        }
-
-        //get total number of goals without sorting by foot
-        totalGoals = new int[numOfMatchDifs + 1];//one for total's total
-        for (int i = 0; i < numOfMatchDifs; i++){
-            totalGoals[i] = statsTotSorted[i][1] + statsTotSorted[i][2] + statsTotSorted[i][3];
-            totalGoals[5] += totalGoals[i];
-        }
-
-        //get total number of penalties without sorting by side
-        totalMadePens = statsTotUnsorted[5] + statsTotUnsorted[6];
-        totalMissedPens = statsTotUnsorted[7] + statsTotUnsorted[8];
-
+        cursor.moveToNext();
+        double output = cursor.getDouble(0);
         cursor.close();
-    }
-    
-    private void fillStatsToTable(boolean averages){
-
-        if (checks[0]) {
-            fillGoals(averages);
-        }
-
-        if (checks[2]){
-            fillAssists(averages);
-        }
-
-        if (checks[3]){
-            fillPenalties(averages);
-        }
+        return output;
     }
 
-    private void fillGoals(boolean averages){
-        boolean sortFoot = checks[1];
-        boolean matchDif = checks[5];
-
-        if (sortFoot) {
-            //right goals row
-            if (matchDif) {
-                setSortedStatInPlace(averages, binding.TabRG1, 1, 1);
-                setSortedStatInPlace(averages, binding.TabRG2, 2, 1);
-                setSortedStatInPlace(averages, binding.TabRG3, 3, 1);
-                setSortedStatInPlace(averages, binding.TabRG4, 4, 1);
-                setSortedStatInPlace(averages, binding.TabRG5, 5, 1);
-            }
-            //total
-            setUnsortedStatInPlace(averages, binding.TabRGT, 1);
-
-            //left goals row
-            if (matchDif) {
-                setSortedStatInPlace(averages, binding.TabLG1, 1, 2);
-                setSortedStatInPlace(averages, binding.TabLG2, 2, 2);
-                setSortedStatInPlace(averages, binding.TabLG3, 3, 2);
-                setSortedStatInPlace(averages, binding.TabLG4, 4, 2);
-                setSortedStatInPlace(averages, binding.TabLG5, 5, 2);
-            }
-            //total
-            setUnsortedStatInPlace(averages, binding.TabLGT, 2);
-
-            //head goals row
-            if (matchDif) {
-                setSortedStatInPlace(averages, binding.TabHG1, 1, 3);
-                setSortedStatInPlace(averages, binding.TabHG2, 2, 3);
-                setSortedStatInPlace(averages, binding.TabHG3, 3, 3);
-                setSortedStatInPlace(averages, binding.TabHG4, 4, 3);
-                setSortedStatInPlace(averages, binding.TabHG5, 5, 3);
-            }
-            //total
-            setUnsortedStatInPlace(averages,binding.TabHGT,3);
-        }
-        else {
-            if (matchDif) {
-                setTotalGoalsInPlace(averages, binding.TabLG1, 0);
-                setTotalGoalsInPlace(averages, binding.TabLG2, 1);
-                setTotalGoalsInPlace(averages, binding.TabLG3, 2);
-                setTotalGoalsInPlace(averages, binding.TabLG4, 3);
-                setTotalGoalsInPlace(averages, binding.TabLG5, 4);
-            }
-            //total
-            setTotalGoalsInPlace(averages, binding.TabLGT, 5);
-        }
+    private void fillSum(TextView view, int stat){
+        view.setText(getString(R.string.int_holder, stat));
     }
 
-    private void fillAssists(boolean averages){
-        boolean matchDif = checks[5];
-        if (matchDif) {
-            setSortedStatInPlace(averages, binding.TabAs1, 1, 4);
-            setSortedStatInPlace(averages, binding.tabAs2, 2, 4);
-            setSortedStatInPlace(averages, binding.tabAs3, 3, 4);
-            setSortedStatInPlace(averages, binding.tabAs4, 4, 4);
-            setSortedStatInPlace(averages, binding.tabAs5, 5, 4);
-        }
-        //total
-        setUnsortedStatInPlace(averages,binding.TabAsT,4);
+    private void fillAvg(TextView view, double stat){
+        view.setText(getString(R.string.float_holder, stat));
     }
 
-    private void fillPenalties(boolean averages){
-        if (checks[4]){//sort by side
-            setUnsortedStatInPlace(averages,binding.TabRPMd,5);
-            setUnsortedStatInPlace(averages,binding.TabLPMd,6);
-            setUnsortedStatInPlace(averages,binding.TabRPMs,7);
-            setUnsortedStatInPlace(averages,binding.TabLPMs,8);
-        }
-        else {
-            setTotalPensInPlace(averages);
-        }
 
-    }
-
-    private void setSortedStatInPlace(boolean averages, TextView view, int matchDif, int col){
-        String text = (averages) ? getString(R.string.float_holder, statsAvgSorted[matchDif-1][col]) :
-                getString(R.string.int_holder, statsTotSorted[matchDif-1][col]);
-        view.setText(text);
-    }
-
-    private void setTotalGoalsInPlace(boolean averages, TextView view, int ind){
-        String text = (averages) ? getString(R.string.float_holder, performDivision(totalGoals[ind],totalNumOfMatches)) :
-                getString(R.string.int_holder, totalGoals[ind]);
-        view.setText(text);
-    }
-
-    private void setTotalPensInPlace(boolean averages){
-        String textMade = (averages) ? getString(R.string.float_holder, performDivision(totalMadePens, totalNumOfMatches)) :
-                getString(R.string.int_holder, totalMadePens);
-        String textMissed = (averages) ? getString(R.string.float_holder, performDivision(totalMissedPens, totalNumOfMatches)) :
-                getString(R.string.int_holder, totalMissedPens);
-        binding.TabRPMd.setText(textMade);
-        binding.TabRPMs.setText(textMissed);
-    }
-
-    private void setUnsortedStatInPlace(boolean averages, TextView view, int col){
-        String text = (averages) ? getString(R.string.float_holder, statsAvgUnsorted[col]) :
-                getString(R.string.int_holder, statsTotUnsorted[col]);
-
-        view.setText(text);
-    }
-
-    private double performDivision(int dividend, int divisor){
-        return (divisor == 0) ? 0.0 : ((double) dividend) / ((double) divisor);
-    }
 }

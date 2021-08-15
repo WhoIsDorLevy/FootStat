@@ -8,8 +8,7 @@ public class AppDB extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
     public static final int NUM_OF_COLS = 9;
     public static final String DATABASE_NAME = "sample_database";
-    public static String MATCHES_TABLE_NAME = "matchesTab";
-    public static String MATCH_DIFF_TABLE_NAME = "matchDifTab";
+    public static String TABLE_NAME = "matchesTab";
     public static String GOALS_TABLE_NAME = "goalsTab";
     public static String PENALTIES_TABLE_NAME = "penaltiesTab";
     public static final String COLUMN_ID = "id";
@@ -18,13 +17,16 @@ public class AppDB extends SQLiteOpenHelper {
     public static final String R_GOALS = "rGoals";
     public static final String L_GOALS = "lGoals";
     public static final String H_GOALS = "hGoals";
+    public static final String T_GOALS = "tGoals";//total goals
     public static final String ASSISTS = "assists";
     public static final String R_PENALTIES_MADE = "rPenaltiesMade";
     public static final String L_PENALTIES_MADE = "lPenaltiesMade";
+    public static final String T_PENALTIES_MADE = "tPenaltiesMade";//total penalties made
     public static final String R_PENALTIES_MISSED = "rPenaltiesMissed";
     public static final String L_PENALTIES_MISSED = "lPenaltiesMissed";
+    public static final String T_PENALTIES_MISSED = "tPenaltiesMissed";
 
-    private boolean createdTable = false;
+    private static boolean createdTables = false;
     private static AppDB instance = null;
 
 
@@ -35,8 +37,8 @@ public class AppDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        if (!createdTable) {
-            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + MATCHES_TABLE_NAME + " (\n" +
+        if (!createdTables) {
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (\n" +
                     COLUMN_ID + " integer PRIMARY KEY AUTOINCREMENT,\n" +
                     DATE + " date NOT NULL,\n" +
                     MATCH_DIFFICULTY + " integer NOT NULL,\n" +
@@ -49,13 +51,27 @@ public class AppDB extends SQLiteOpenHelper {
                     R_PENALTIES_MISSED + " integer NOT NULL,\n" +
                     L_PENALTIES_MISSED + " integer NOT NULL" +
                     ");");
-            createdTable = true;
+
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " + GOALS_TABLE_NAME + " (\n" +
+                    COLUMN_ID + " integer PRIMARY KEY REFERENCES "+ TABLE_NAME + "(" +COLUMN_ID+ ")" + ",\n" +
+                    DATE + " date REFERENCES "+ TABLE_NAME + "(" +DATE+ ")" + ",\n" +
+                    MATCH_DIFFICULTY + " integer NOT NULL,\n" +
+                    R_GOALS + " integer NOT NULL,\n" +
+                    L_GOALS + " integer NOT NULL,\n" +
+                    H_GOALS + " integer NOT NULL,\n" +
+                    ASSISTS + " integer NOT NULL,\n" +
+                    R_PENALTIES_MADE + " integer NOT NULL,\n" +
+                    L_PENALTIES_MADE + " integer NOT NULL,\n" +
+                    R_PENALTIES_MISSED + " integer NOT NULL,\n" +
+                    L_PENALTIES_MISSED + " integer NOT NULL" +
+                    ");");
+            createdTables = true;
         }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + MATCHES_TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(sqLiteDatabase);
     }
 
