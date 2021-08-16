@@ -227,9 +227,9 @@ public class ShowStatsContFragment extends Fragment {
 
         String[] projection = {toWrap};
         String selection = DATE + " >= " + dateFrom + " and " + DATE + " <= " + dateTo;
-//        if (matchDif < 6){
-//            selection += " and " + MATCH_DIFFICULTY + " = " + matchDif;
-//        }
+        if (matchDif < 6){
+            selection += " and " + MATCH_DIFFICULTY + " = " + matchDif;
+        }
 
         Cursor cursor = db.query(
                 TABLE_NAME,
@@ -257,18 +257,16 @@ public class ShowStatsContFragment extends Fragment {
                                 "AVG(" + stat + ")";
 
         String[] projection = {toWrap};
-        String selection = DATE + " >= ? AND " + DATE + " <= ?";
-        String[] selectionArgs = {dateFrom, dateTo};
+        String selection = DATE + " >= " + dateFrom + " and " + DATE + " <= " + dateTo;
         if (matchDif < 6){
-            selection += " AND " + MATCH_DIFFICULTY + " = ?";
-            selectionArgs = new String[]{dateFrom, dateTo, "" + matchDif};
+            selection += " and " + MATCH_DIFFICULTY + " = " + matchDif;
         }
 
         Cursor cursor = db.query(
                 TABLE_NAME,
                 projection,
                 selection,
-                selectionArgs,
+                null,
                 null,
                 null,
                 null);
