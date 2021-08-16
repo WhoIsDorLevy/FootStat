@@ -1,5 +1,7 @@
 package com.example.statsapp;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -13,23 +15,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import androidx.appcompat.widget.Toolbar;
+
 
 
 import com.example.statsapp.databinding.FragmentShowStatsBinding;
 
+import java.util.Calendar;
 
 
 public class ShowStatsFragment extends Fragment {
 
     private FragmentShowStatsBinding binding;
-
-
+    private String dateFrom, dateTo; //yyyyMMdd
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        dateFrom = "19000101";
+        dateTo = "21001231";
         binding = FragmentShowStatsBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -37,6 +41,33 @@ public class ShowStatsFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        binding.checkBoxFrom.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b){
+                showDatePickerDialog(binding.checkBoxFrom, (datePicker, year, month, day) -> {
+                    dateFrom = getString(R.string.date_holder, year,month+1,day);
+                    binding.textViewDateFrom.setText(getString(R.string.date_hint_holder, day, month+1, year));
+
+                });
+            }
+            else {
+                dateFrom = "19000101";
+                binding.textViewDateFrom.setText(R.string.date_hint);
+            }
+        });
+        binding.checkBoxTo.setOnCheckedChangeListener((compoundButton, b) -> {
+            if (b){
+                showDatePickerDialog(binding.checkBoxTo, (datePicker, year, month, day) -> {
+                    dateTo = getString(R.string.date_holder, year,month+1,day);
+                    binding.textViewDateTo.setText(getString(R.string.date_hint_holder, day, month+1, year));
+                });
+            }
+            else {
+                dateTo = "21001231";
+                binding.textViewDateTo.setText(R.string.date_hint);
+            }
+        });
 
         binding.buttonShowChosen.setOnClickListener(view1 -> {
             CheckBox[] checkBoxes = new CheckBox[]{binding.GoalsCheckBox, binding.SortByFootCheckBox,
@@ -46,9 +77,10 @@ public class ShowStatsFragment extends Fragment {
             boolean[] checksPrimitive = Helpers.toPrimitiveBoolean(boxedArr);
 
             ShowStatsFragmentDirections.ActionShowStatsFragmentToShowStatsContFragment action =
-                    ShowStatsFragmentDirections.actionShowStatsFragmentToShowStatsContFragment(checksPrimitive);
+                    ShowStatsFragmentDirections.actionShowStatsFragmentToShowStatsContFragment(checksPrimitive, dateFrom, dateTo);
             NavHostFragment.findNavController(ShowStatsFragment.this)
                     .navigate(action);
+            resetChecksDefault();
         });
 
         binding.GoalsCheckBox.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -74,6 +106,16 @@ public class ShowStatsFragment extends Fragment {
         });
     }
 
+    private void resetChecksDefault(){
+        binding.GoalsCheckBox.setChecked(false);
+        binding.SortByFootCheckBox.setChecked(false);
+        binding.assistsCheckBox.setChecked(false);
+        binding.PenaltiesCheckBox.setChecked(false);
+        binding.SortBySideCheckBox.setChecked(false);
+        binding.checkBoxFrom.setChecked(false);
+        binding.checkBoxTo.setChecked(false);
+    }
+
     //update buttons that require at least one category to be enabled
     private void updateMatchDif(boolean b){
         if (b != binding.matchDifCheckBox.isEnabled()) {
@@ -90,6 +132,20 @@ public class ShowStatsFragment extends Fragment {
             }
 
         }
+    }
+
+    private void showDatePickerDialog(CheckBox box ,DatePickerDialog.OnDateSetListener listener){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                getActivity(),
+                listener,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
+                (dialogInterface, i) -> box.setChecked(false));
+
+        datePickerDialog.show();
     }
 
     private void updateShowChosen(boolean b){

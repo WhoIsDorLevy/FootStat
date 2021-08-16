@@ -25,6 +25,8 @@ public class ShowStatsContFragment extends Fragment {
 
     private FragmentShowStatsContBinding binding;
     private boolean[] checks;
+    private String dateFrom;
+    private String dateTo;
     private SQLiteDatabase db;
 
 
@@ -39,7 +41,10 @@ public class ShowStatsContFragment extends Fragment {
     }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         checks = ShowStatsContFragmentArgs.fromBundle(getArguments()).getChecks();
+        dateFrom = ShowStatsContFragmentArgs.fromBundle(getArguments()).getDateFrom();
+        dateTo = ShowStatsContFragmentArgs.fromBundle(getArguments()).getDateTo();
         getAndFillStatsToTable(false);
         filterTable();
         binding.switch2.setOnCheckedChangeListener((compoundButton, b) -> {
@@ -211,21 +216,30 @@ public class ShowStatsContFragment extends Fragment {
     }
 
     private int getSumOf(String stat, int matchDif){
-        boolean totalGoals = stat.equals("totalGoals");
-        boolean totalPenaltiesMade = stat.equals("totalPenaltiesMade");
-        boolean totalPenaltiesMissed = stat.equals("totalPenaltiesMissed");
+        boolean totalGoals = stat.equals(T_GOALS);
+        boolean totalPenaltiesMade = stat.equals(T_PENALTIES_MADE);
+        boolean totalPenaltiesMissed = stat.equals(T_PENALTIES_MISSED);
 
-        String select = totalGoals ? "SUM(" + R_GOALS + " + " + L_GOALS + " + " + H_GOALS + ")" :
+        String toWrap = totalGoals ? "SUM(" + R_GOALS + " + " + L_GOALS + " + " + H_GOALS + ")" :
                 totalPenaltiesMade ? "SUM(" + R_PENALTIES_MADE + " + " + L_PENALTIES_MADE + ")" :
                         totalPenaltiesMissed ? "SUM(" + R_PENALTIES_MISSED + " + " + L_PENALTIES_MISSED + ")" :
                                 "SUM(" + stat + ")";
-        StringBuilder builder = new StringBuilder();
-        builder.append("SELECT ").append(select).append('\n').append("AS stat\n").append("FROM ").append(TABLE_NAME);
-        if (matchDif < 6){
-            builder.append('\n').append("WHERE ").append(MATCH_DIFFICULTY).append(" = ").append(matchDif);
-        }
-        builder.append(';');
-        Cursor cursor = db.rawQuery(builder.toString(), null);
+
+        String[] projection = {toWrap};
+        String selection = DATE + " >= " + dateFrom + " and " + DATE + " <= " + dateTo;
+//        if (matchDif < 6){
+//            selection += " and " + MATCH_DIFFICULTY + " = " + matchDif;
+//        }
+
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                projection,
+                selection,
+                null,
+                null,
+                null,
+                null);
+
         cursor.moveToNext();
         int output = cursor.getInt(0);
         cursor.close();
@@ -233,9 +247,9 @@ public class ShowStatsContFragment extends Fragment {
     }
 
     private double getAvgOf(String stat, int matchDif){
-        boolean totalGoals = stat.equals("totalGoals");
-        boolean totalPenaltiesMade = stat.equals("totalPenaltiesMade");
-        boolean totalPenaltiesMissed = stat.equals("totalPenaltiesMissed");
+        boolean totalGoals = stat.equals(T_GOALS);
+        boolean totalPenaltiesMade = stat.equals(T_PENALTIES_MADE);
+        boolean totalPenaltiesMissed = stat.equals(T_PENALTIES_MISSED);
 
         String toWrap = totalGoals ? "AVG(" + R_GOALS + " + " + L_GOALS + " + " + H_GOALS + ")" :
                 totalPenaltiesMade ? "AVG(" + R_PENALTIES_MADE + " + " + L_PENALTIES_MADE + ")" :
@@ -243,13 +257,18 @@ public class ShowStatsContFragment extends Fragment {
                                 "AVG(" + stat + ")";
 
         String[] projection = {toWrap};
-        String selection = (matchDif == 5) ? null : MATCH_DIFFICULTY + " = " + matchDif;
+        String selection = DATE + " >= ? AND " + DATE + " <= ?";
+        String[] selectionArgs = {dateFrom, dateTo};
+        if (matchDif < 6){
+            selection += " AND " + MATCH_DIFFICULTY + " = ?";
+            selectionArgs = new String[]{dateFrom, dateTo, "" + matchDif};
+        }
 
         Cursor cursor = db.query(
                 TABLE_NAME,
                 projection,
                 selection,
-                null,
+                selectionArgs,
                 null,
                 null,
                 null);

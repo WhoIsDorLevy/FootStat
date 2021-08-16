@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -56,7 +57,7 @@ public class insertMatchFragment extends Fragment {
         binding.SelectDateTextView.setOnClickListener(this::showDatePickerDialog);
         binding.buttonEnter.setOnClickListener(view12 -> {
             if (date == null){
-                Toast.makeText(activity, R.string.match_added, Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, R.string.please_choose_date, Toast.LENGTH_LONG).show();
             }
             else {
                 getInputs();
@@ -125,7 +126,7 @@ public class insertMatchFragment extends Fragment {
     }
 
     private void checkValidity(){
-        boolean toEnable = date != null;
+        boolean toEnable = true;
         for (boolean valid : isValid){
             toEnable &= valid;
         }
@@ -170,7 +171,8 @@ public class insertMatchFragment extends Fragment {
 
     private void uploadStats(){
         ContentValues values = new ContentValues();
-        values.put(AppDB.DATE, date);
+        int dateVal = Integer.parseInt(date);
+        values.put(AppDB.DATE, dateVal);
         values.put(AppDB.MATCH_DIFFICULTY, matchDifVal);
         values.put(AppDB.R_GOALS, rGoalsVal);
         values.put(AppDB.L_GOALS, lGoalsVal);
@@ -200,8 +202,8 @@ public class insertMatchFragment extends Fragment {
 
     private void onDateSet(DatePicker datePicker, int year, int month, int dayOfMonth) {
         month++;//Jenuary is 0
-        date = getString(R.string.date_holder,dayOfMonth,month,year);
-        binding.SelectDateTextView.setText(date);
+        date = getString(R.string.date_holder,year,month,dayOfMonth);
+        binding.SelectDateTextView.setText(getString(R.string.date_hint_holder,dayOfMonth,month,year));
     }
 
     private boolean hideKeyboard(Activity activity) {

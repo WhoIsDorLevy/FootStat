@@ -51,6 +51,11 @@
         <argument
             android:name="checks"
             app:argType="boolean[]" />
+        <argument
+            android:name="dateFrom"
+            app:argType="string" />
+        <argument android:name="dateTo"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/insertMatchFragment"

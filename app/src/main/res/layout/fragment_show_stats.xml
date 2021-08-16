@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.082"
+        app:layout_constraintVertical_bias="0.047"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <CheckBox
@@ -30,6 +30,7 @@
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="356dp"
         android:layout_height="50dp"
+        android:checked="false"
         android:enabled="false"
         android:text="@string/sort_by_match_dif"
         android:textSize="18sp"
@@ -44,6 +45,7 @@
         android:id="@+id/GoalsCheckBox"
         android:layout_width="356dp"
         android:layout_height="50dp"
+        android:checked="false"
         android:text="@string/goals"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,6 +59,7 @@
         android:id="@+id/SortByFootCheckBox"
         android:layout_width="282dp"
         android:layout_height="50dp"
+        android:checked="false"
         android:enabled="false"
         android:text="@string/sort_by_foot"
         android:textSize="18sp"
@@ -71,6 +74,7 @@
         android:id="@+id/assistsCheckBox"
         android:layout_width="356dp"
         android:layout_height="50dp"
+        android:checked="false"
         android:text="@string/assists"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,6 +88,7 @@
         android:id="@+id/PenaltiesCheckBox"
         android:layout_width="356dp"
         android:layout_height="50dp"
+        android:checked="false"
         android:text="@string/penalties"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,6 +102,7 @@
         android:id="@+id/SortBySideCheckBox"
         android:layout_width="282dp"
         android:layout_height="50dp"
+        android:checked="false"
         android:enabled="false"
         android:text="@string/sort_by_side"
         android:textSize="18sp"
@@ -120,6 +126,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.938" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFrom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/from"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.123"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158" />
+
+    <CheckBox
+        android:id="@+id/checkBoxTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/to"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.698"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158" />
+
+    <TextView
+        android:id="@+id/textViewDateFrom"
+        android:layout_width="109dp"
+        android:layout_height="31dp"
+        android:background="@drawable/border"
+        android:clickable="false"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="@string/date_hint"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.227" />
+
+    <TextView
+        android:id="@+id/textViewDateTo"
+        android:layout_width="109dp"
+        android:layout_height="31dp"
+        android:background="@drawable/border"
+        android:clickable="false"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="@string/date_hint"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.821"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.227" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
