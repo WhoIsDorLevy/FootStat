@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Stats App</string>
+    <string name="app_name">FootStat</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">StatsApp</string>
+    <string name="first_fragment_label">FootStat</string>
     <string name="second_fragment_label">Insert Match</string>
     <string name="show_stats_fragment_label">Show Stats</string>
     <string name="exit">Exit</string>
