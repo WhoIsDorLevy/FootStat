@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.statsapp.databinding.FragmentShowStatsContBinding;
 
+import java.util.Locale;
+
 import static com.example.statsapp.AppDB.*;
 
 
@@ -179,14 +181,25 @@ public class ShowStatsContFragment extends Fragment {
 
     private void getAndFillPenalties(boolean averages){
         if (checks[4]){//sort by side
-            getAndFillStat(averages, R_PENALTIES_MADE, 6, binding.TabRPMd);
-            getAndFillStat(averages, R_PENALTIES_MISSED, 6, binding.TabRPMs);
-            getAndFillStat(averages, L_PENALTIES_MADE, 6, binding.TabLPMd);
-            getAndFillStat(averages, L_PENALTIES_MISSED, 6, binding.TabLPMs);
+            if (averages){
+                getAndFillPenaltyAvg(binding.PenTabRightRow, R_PENALTIES_MADE, R_PENALTIES_MISSED);
+                getAndFillPenaltyAvg(binding.PenTabLeftRow, L_PENALTIES_MADE, L_PENALTIES_MISSED);
+            }
+            else {
+                getAndFillStat(averages, R_PENALTIES_MADE, 6, binding.TabRPMd);
+                getAndFillStat(averages, R_PENALTIES_MISSED, 6, binding.TabRPMs);
+                getAndFillStat(averages, L_PENALTIES_MADE, 6, binding.TabLPMd);
+                getAndFillStat(averages, L_PENALTIES_MISSED, 6, binding.TabLPMs);
+            }
         }
         else {//don't sort by side
-            getAndFillStat(averages, T_PENALTIES_MADE, 6, binding.TabRPMd);
-            getAndFillStat(averages, T_PENALTIES_MISSED, 6, binding.TabRPMs);
+            if (averages){
+                getAndFillPenaltyAvg(binding.PenTabRightRow, T_PENALTIES_MADE, T_PENALTIES_MISSED);
+            }
+            else {
+                getAndFillStat(averages, T_PENALTIES_MADE, 6, binding.TabRPMd);
+                getAndFillStat(averages, T_PENALTIES_MISSED, 6, binding.TabRPMs);
+            }
         }
     }
 
@@ -283,6 +296,27 @@ public class ShowStatsContFragment extends Fragment {
 
     private void fillAvg(TextView view, double stat){
         view.setText(getString(R.string.float_holder, stat));
+    }
+
+    private void getAndFillPenaltyAvg(TableRow row, String made, String missed){
+        fillPenaltyAvg(row, getPenaltyAvg(made, missed));
+    }
+
+    //returns value of made penalties only
+    private double getPenaltyAvg(String made, String missed){
+        int sumMade = getSumOf(made, 6);
+        int sumMissed = getSumOf(missed, 6);
+        return Helpers.calculatePercent(sumMade, sumMade+sumMissed);
+    }
+    private void fillPenaltyAvg(TableRow row, double value){
+        String formatPercent = "%.1f";
+        String madePercent = String.format(Locale.US,formatPercent, value) + "%";
+        String missedPercent = String.format(Locale.US,formatPercent, 100.0 - value) + "%";
+        TextView madeTextView = (TextView) row.getChildAt(1);
+        TextView missedTextView = (TextView) row.getChildAt(2);
+        madeTextView.setText(madePercent);
+        missedTextView.setText(missedPercent);
+
     }
 
 

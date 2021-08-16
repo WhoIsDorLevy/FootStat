@@ -39,4 +39,8 @@ public class Helpers {
         }
         return output;
     }
+
+    public static double calculatePercent(int dividend, int divisor){
+        return (divisor == 0) ? 0 : ((double)dividend * 100.0) / ((double) divisor);
+    }
 }
