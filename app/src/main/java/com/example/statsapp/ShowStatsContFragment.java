@@ -66,16 +66,17 @@ public class ShowStatsContFragment extends Fragment {
 
 
     private void filterTable(){
-        if (filterFirstTable(checks[0], checks[2])) {
+        if (filterFirstTable(checks[0], checks[2], checks[6])) {
             filterMatchDif(checks[5]);
+            filterNumOfMatches(checks[6]);
             filterGoals(checks[0], checks[1]);
             filterAssists(checks[2]);
         }
         filterPenalties(checks[3], checks[4]);
     }
 
-    private boolean filterFirstTable(boolean goals, boolean assists){
-        boolean result = goals | assists;
+    private boolean filterFirstTable(boolean goals, boolean assists, boolean numOfMatches){
+        boolean result = goals | assists | numOfMatches;
         if (!result){
             deleteView(binding.tableLayout);
         }
@@ -88,26 +89,31 @@ public class ShowStatsContFragment extends Fragment {
                 binding.tableLayout.setColumnStretchable(i, false);
             }
             deleteView(binding.Tab1);
+            deleteView(binding.NumOfMatches1);
             deleteView(binding.TabRG1);
             deleteView(binding.TabLG1);
             deleteView(binding.TabHG1);
             deleteView(binding.TabAs1);
             deleteView(binding.Tab2);
+            deleteView(binding.NumOfMatches2);
             deleteView(binding.TabRG2);
             deleteView(binding.TabLG2);
             deleteView(binding.TabHG2);
             deleteView(binding.tabAs2);
             deleteView(binding.Tab3);
+            deleteView(binding.NumOfMatches3);
             deleteView(binding.TabRG3);
             deleteView(binding.TabLG3);
             deleteView(binding.TabHG3);
             deleteView(binding.tabAs3);
             deleteView(binding.Tab4);
+            deleteView(binding.NumOfMatches4);
             deleteView(binding.TabRG4);
             deleteView(binding.TabLG4);
             deleteView(binding.TabHG4);
             deleteView(binding.tabAs4);
             deleteView(binding.Tab5);
+            deleteView(binding.NumOfMatches5);
             deleteView(binding.TabRG5);
             deleteView(binding.TabLG5);
             deleteView(binding.TabHG5);
@@ -117,6 +123,11 @@ public class ShowStatsContFragment extends Fragment {
         }
     }
 
+    private void filterNumOfMatches(boolean check){
+        if (!check){
+            deleteView(binding.numOfMatchesRow);
+        }
+    }
 
     private void filterGoals(boolean check, boolean sort){
         if (!check){
@@ -152,6 +163,9 @@ public class ShowStatsContFragment extends Fragment {
     }
 
     private void getAndFillStatsToTable(boolean averages){
+        if (checks[6]){//num of matches
+            getAndFillNumOfMatches(averages);
+        }
         if (checks[0]){//goals
             getAndFillGoals(averages);
         }
@@ -162,6 +176,46 @@ public class ShowStatsContFragment extends Fragment {
             getAndFillPenalties(averages);
         }
     }
+
+    private void getAndFillNumOfMatches(boolean averages){
+        int totalNumOfMatches = getNumOfMatches(6);
+        fillNumOfMatches(averages, binding.NumOfMatchesT, totalNumOfMatches, totalNumOfMatches);
+        if (checks[5]){
+            fillNumOfMatches(averages, binding.NumOfMatches1, getNumOfMatches(1), totalNumOfMatches);
+            fillNumOfMatches(averages, binding.NumOfMatches2, getNumOfMatches(2), totalNumOfMatches);
+            fillNumOfMatches(averages, binding.NumOfMatches3, getNumOfMatches(3), totalNumOfMatches);
+            fillNumOfMatches(averages, binding.NumOfMatches4, getNumOfMatches(4), totalNumOfMatches);
+            fillNumOfMatches(averages, binding.NumOfMatches5, getNumOfMatches(5), totalNumOfMatches);
+        }
+    }
+
+    private void fillNumOfMatches(boolean averages, TextView view, int value, int total){
+        if (averages){
+            String toFill = String.format(Locale.US, "%.1f", Helpers.calculatePercent(value,total)) + "%";
+            view.setText(toFill);
+        }
+        else {
+            view.setText(getString(R.string.int_holder, value));
+        }
+    }
+
+    private int getNumOfMatches(int matchDif){
+        String selection = (matchDif == 6) ? null : MATCH_DIFFICULTY + " = " + matchDif;
+        Cursor cursor = db.query(
+                TABLE_NAME,
+                new String[]{"*"},
+                selection,
+                null,
+                null,
+                null,
+                null
+        );
+        int output = cursor.getCount();
+        cursor.close();
+        return output;
+    }
+
+
     private void getAndFillGoals(boolean averages){
 
         if (checks[1]) {//sort by foot
@@ -186,10 +240,10 @@ public class ShowStatsContFragment extends Fragment {
                 getAndFillPenaltyAvg(binding.PenTabLeftRow, L_PENALTIES_MADE, L_PENALTIES_MISSED);
             }
             else {
-                getAndFillStat(averages, R_PENALTIES_MADE, 6, binding.TabRPMd);
-                getAndFillStat(averages, R_PENALTIES_MISSED, 6, binding.TabRPMs);
-                getAndFillStat(averages, L_PENALTIES_MADE, 6, binding.TabLPMd);
-                getAndFillStat(averages, L_PENALTIES_MISSED, 6, binding.TabLPMs);
+                getAndFillStat(false, R_PENALTIES_MADE, 6, binding.TabRPMd);
+                getAndFillStat(false, R_PENALTIES_MISSED, 6, binding.TabRPMs);
+                getAndFillStat(false, L_PENALTIES_MADE, 6, binding.TabLPMd);
+                getAndFillStat(false, L_PENALTIES_MISSED, 6, binding.TabLPMs);
             }
         }
         else {//don't sort by side
@@ -197,8 +251,8 @@ public class ShowStatsContFragment extends Fragment {
                 getAndFillPenaltyAvg(binding.PenTabRightRow, T_PENALTIES_MADE, T_PENALTIES_MISSED);
             }
             else {
-                getAndFillStat(averages, T_PENALTIES_MADE, 6, binding.TabRPMd);
-                getAndFillStat(averages, T_PENALTIES_MISSED, 6, binding.TabRPMs);
+                getAndFillStat(false, T_PENALTIES_MADE, 6, binding.TabRPMd);
+                getAndFillStat(false, T_PENALTIES_MISSED, 6, binding.TabRPMs);
             }
         }
     }

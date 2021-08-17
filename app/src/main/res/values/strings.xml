@@ -61,4 +61,6 @@
     <string name="to">To:</string>
     <string name="date_hint">dd/MM/yyyy</string>
     <string name="date_hint_holder">%02d/%02d/%04d</string>
+    <string name="num_of_matches_table">"Number of\nMatches"</string>
+    <string name="num_of_matches_check_box">Number of Matches</string>
 </resources>

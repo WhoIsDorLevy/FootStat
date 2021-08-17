@@ -29,7 +29,7 @@
         android:id="@+id/matchDifCheckBox"
         style="@style/Widget.AppCompat.CompoundButton.CheckBox"
         android:layout_width="356dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:checked="false"
         android:enabled="false"
         android:text="@string/sort_by_match_dif"
@@ -44,21 +44,35 @@
     <CheckBox
         android:id="@+id/GoalsCheckBox"
         android:layout_width="356dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:checked="false"
         android:text="@string/goals"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.315" />
+        app:layout_constraintVertical_bias="0.446" />
+
+    <CheckBox
+        android:id="@+id/NumOfMatchesCheckBox"
+        android:layout_width="356dp"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:text="@string/num_of_matches_check_box"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.376" />
 
     <CheckBox
         android:id="@+id/SortByFootCheckBox"
         android:layout_width="282dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:checked="false"
         android:enabled="false"
         android:text="@string/sort_by_foot"
@@ -68,12 +82,12 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
+        app:layout_constraintVertical_bias="0.516" />
 
     <CheckBox
         android:id="@+id/assistsCheckBox"
         android:layout_width="356dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:checked="false"
         android:text="@string/assists"
         android:textSize="18sp"
@@ -82,26 +96,26 @@
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.587" />
 
     <CheckBox
         android:id="@+id/PenaltiesCheckBox"
         android:layout_width="356dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:checked="false"
         android:text="@string/penalties"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.609" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <CheckBox
         android:id="@+id/SortBySideCheckBox"
         android:layout_width="282dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:checked="false"
         android:enabled="false"
         android:text="@string/sort_by_side"
@@ -111,7 +125,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.682" />
+        app:layout_constraintVertical_bias="0.727" />
 
     <Button
         android:id="@+id/button_show_chosen"

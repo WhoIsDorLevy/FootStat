@@ -72,7 +72,7 @@ public class ShowStatsFragment extends Fragment {
         binding.buttonShowChosen.setOnClickListener(view1 -> {
             CheckBox[] checkBoxes = new CheckBox[]{binding.GoalsCheckBox, binding.SortByFootCheckBox,
                                                     binding.assistsCheckBox, binding.PenaltiesCheckBox,
-                                                    binding.SortBySideCheckBox, binding.matchDifCheckBox};
+                                                    binding.SortBySideCheckBox, binding.matchDifCheckBox, binding.NumOfMatchesCheckBox};
             Boolean[] boxedArr = Helpers.map(checkBoxes, CompoundButton::isChecked, () -> new Boolean[0]);
             boolean[] checksPrimitive = Helpers.toPrimitiveBoolean(boxedArr);
 
@@ -114,6 +114,7 @@ public class ShowStatsFragment extends Fragment {
         binding.SortBySideCheckBox.setChecked(false);
         binding.checkBoxFrom.setChecked(false);
         binding.checkBoxTo.setChecked(false);
+        binding.NumOfMatchesCheckBox.setChecked(false);
     }
 
     //update buttons that require at least one category to be enabled
