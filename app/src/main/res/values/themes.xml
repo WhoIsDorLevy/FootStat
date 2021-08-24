@@ -13,10 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <array name="initial_slider_values">
-        <item>2000</item>
-        <item>3500</item>
-    </array>
+
     <style name="Theme.StatsApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

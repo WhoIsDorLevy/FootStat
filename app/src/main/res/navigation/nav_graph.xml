@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
     app:startDestination="@id/FirstFragment">
 
     <fragment
@@ -12,24 +11,14 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-        <action
             android:id="@+id/action_FirstFragment_to_ShowStatsFragment"
             app:destination="@id/showStatsFragment" />
         <action
             android:id="@+id/action_FirstFragment_to_insertMatchFragment"
             app:destination="@id/insertMatchFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.statsapp.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_FirstFragment_to_listOfMatchesFragment"
+            app:destination="@id/listOfMatchesFragment" />
     </fragment>
     <fragment
         android:id="@+id/showStatsFragment"
@@ -64,6 +53,14 @@
         tools:layout="@layout/fragment_insert_match" >
         <action
             android:id="@+id/action_insertMatchFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfMatchesFragment"
+        android:name="com.example.statsapp.ListOfMatchesFragment"
+        android:label="@string/list_of_matches_label">
+        <action
+            android:id="@+id/action_listOfMatchesFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

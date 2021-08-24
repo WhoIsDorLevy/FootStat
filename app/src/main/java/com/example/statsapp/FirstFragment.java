@@ -1,5 +1,6 @@
 package com.example.statsapp;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
 
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
@@ -36,7 +38,9 @@ public class FirstFragment extends Fragment {
         binding.buttonShowStats.setOnClickListener(view1 ->
                 NavHostFragment.findNavController(FirstFragment.this)
                 .navigate(R.id.action_FirstFragment_to_ShowStatsFragment));
-
+        binding.buttonListOfMatches.setOnClickListener(view12 ->
+                NavHostFragment.findNavController(FirstFragment.this)
+                .navigate(R.id.action_FirstFragment_to_listOfMatchesFragment));
         binding.buttonExit.setOnClickListener(view1 -> {
             getActivity().finish();
             System.exit(0);

@@ -72,7 +72,8 @@ public class ShowStatsFragment extends Fragment {
         binding.buttonShowChosen.setOnClickListener(view1 -> {
             CheckBox[] checkBoxes = new CheckBox[]{binding.GoalsCheckBox, binding.SortByFootCheckBox,
                                                     binding.assistsCheckBox, binding.PenaltiesCheckBox,
-                                                    binding.SortBySideCheckBox, binding.matchDifCheckBox, binding.NumOfMatchesCheckBox};
+                                                    binding.SortBySideCheckBox, binding.matchDifCheckBox,
+                                                    binding.NumOfMatchesCheckBox};
             Boolean[] boxedArr = Helpers.map(checkBoxes, CompoundButton::isChecked, () -> new Boolean[0]);
             boolean[] checksPrimitive = Helpers.toPrimitiveBoolean(boxedArr);
 

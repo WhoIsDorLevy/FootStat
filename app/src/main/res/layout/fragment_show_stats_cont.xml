@@ -23,7 +23,7 @@
         app:layout_constraintWidth_percent="0.5" />
 
     <Button
-        android:id="@+id/button_home"
+        android:id="@+id/buttonHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/home"
@@ -110,7 +110,6 @@
 
 
         <TableRow
-            android:id="@+id/HeadRow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="1dp"
@@ -202,7 +201,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/TabTotal"
+                android:id="@+id/TabT"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="2"
@@ -271,7 +270,7 @@
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/black"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/NumOfMatches4"
@@ -283,7 +282,7 @@
                 android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/black"
-                android:textSize="14sp"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/NumOfMatches5"
@@ -319,7 +318,6 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/TabRG"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="1"
@@ -388,7 +386,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/TabRGT"
+                android:id="@+id/TabRG6"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="2"
@@ -477,7 +475,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/TabLGT"
+                android:id="@+id/TabLG6"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="2"
@@ -497,7 +495,6 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/TabHG"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="1"
@@ -566,7 +563,7 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/TabHGT"
+                android:id="@+id/TabHG6"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="2"
@@ -586,7 +583,6 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/TabBlankAs"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="1"
@@ -606,48 +602,48 @@
                 android:layout_column="2"
                 android:layout_margin="1dp"
                 android:background="@color/background_color3"
-                android:gravity="center"
 
+                android:gravity="center"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tabAs2"
+                android:id="@+id/TabAs2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_margin="1dp"
+                android:background="@color/background_color3"
+
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/TabAs3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_margin="1dp"
+                android:background="@color/background_color3"
+
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/TabAs4"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="2"
                 android:layout_margin="1dp"
                 android:background="@color/background_color3"
                 android:gravity="center"
-
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tabAs3"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="2"
-                android:layout_margin="1dp"
-                android:background="@color/background_color3"
-                android:gravity="center"
-
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tabAs4"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_column="2"
-                android:layout_margin="1dp"
-                android:background="@color/background_color3"
-                android:gravity="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/tabAs5"
+                android:id="@+id/TabAs5"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_column="2"
@@ -687,7 +683,6 @@
         app:layout_constraintWidth_percent="0.9">
 
         <TableRow
-            android:id="@+id/PenTabHeadRow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="1dp"
@@ -709,7 +704,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/TabHeadPenLeft"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="0"
@@ -723,7 +717,6 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/TabHeadPenRight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="0"
@@ -792,7 +785,6 @@
             android:background="@color/white">
 
             <TextView
-                android:id="@+id/TabPenLeft"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_column="0"

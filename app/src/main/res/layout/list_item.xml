@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="fill_parent">
+
+    <CheckBox
+        android:id="@+id/checkbox_list"
+        android:layout_width="26dp"
+        android:layout_height="24dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/id_list"
+        android:layout_width="20dp"
+        android:layout_height="fill_parent"
+        android:background="@drawable/content_table_border"
+        android:text="@string/id_text"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/dateList"
+        android:layout_width="75dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/date_list"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/matchDifList"
+        android:textColor="@color/black"
+        android:layout_width="65dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/match_dif_show_stats"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/r_goals_list"
+        android:textColor="@color/black"
+        android:layout_width="50dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/goals_right"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/l_goals_list"
+        android:textColor="@color/black"
+        android:layout_width="50dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/goals_left"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/h_goals_list"
+        android:textColor="@color/black"
+        android:layout_width="60dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/header_other"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/assists_list"
+        android:textColor="@color/black"
+        android:layout_width="55dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/assists"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/r_penalties_made_list"
+        android:textColor="@color/black"
+        android:layout_width="70dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/pen_made_right"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/l_penalties_made_list"
+        android:textColor="@color/black"
+        android:layout_width="70dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/pen_made_left"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/r_penalties_missed_list"
+        android:textColor="@color/black"
+        android:layout_width="70dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/pen_missed_right"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/l_penalties_missed_list"
+        android:textColor="@color/black"
+        android:layout_width="70dp"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@drawable/content_table_border"
+        android:text="@string/pen_missed_left"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

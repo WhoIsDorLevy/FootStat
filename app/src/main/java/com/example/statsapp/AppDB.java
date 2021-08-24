@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AppDB extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "sample_database";
-    public static String TABLE_NAME = "matchesTab";
-    public static final String COLUMN_ID = "id";
+    public static String TABLE_NAME = "AppDatabase";
+    public static final String COLUMN_ID = "_id";
     public static final String DATE = "dayOfMatch";
     public static final String MATCH_DIFFICULTY = "matchDifficulty";
     public static final String R_GOALS = "rGoals";

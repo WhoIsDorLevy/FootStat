@@ -132,7 +132,7 @@
             android:textColorHint="@color/black" />
 
         <Button
-            android:id="@+id/button_enter"
+            android:id="@+id/buttonEnter"
             android:layout_width="100dp"
             android:layout_height="48dp"
             android:enabled="false"
