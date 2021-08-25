@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.statsapp.databinding.FragmentListOfMatchesBinding;
@@ -45,6 +46,13 @@ public class ListOfMatchesFragment extends Fragment {
     }
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+        View header = getLayoutInflater().inflate(R.layout.list_header, null);
+        binding.listView.addHeaderView(header);
+        updateList();
+        binding.button.setOnClickListener(this::createAlertDialog);
+    }
+
+    private void updateList(){
         SQLiteDatabase readDB = AppDB.getInstance(activity).getDatabase(false);
         Cursor cursor = readDB.rawQuery("SELECT * FROM " + TABLE_NAME + ";", null);
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(activity,
@@ -70,10 +78,8 @@ public class ListOfMatchesFragment extends Fragment {
             }
             return false;
         });
-        View header = getLayoutInflater().inflate(R.layout.list_header, null);
-        binding.listView.setAdapter(adapter);
-        binding.listView.addHeaderView(header);
 
+        binding.listView.setAdapter(adapter);
         binding.listView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
             public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
@@ -81,7 +87,6 @@ public class ListOfMatchesFragment extends Fragment {
                 setCheckBoxes();
             }
         });
-        binding.button.setOnClickListener(this::createAlertDialog);
     }
 
     private String setFormatDate(String date){
@@ -102,9 +107,8 @@ public class ListOfMatchesFragment extends Fragment {
                 ()->new Integer[0]);
 
         performDelete(idList);
+        updateList();
         Toast.makeText(activity, "Match(s) deleted successfully", Toast.LENGTH_LONG).show();
-        NavHostFragment.findNavController(ListOfMatchesFragment.this).
-                navigate(R.id.action_listOfMatchesFragment_to_FirstFragment);
     }
 
     private void performDelete(Integer[] idList){
@@ -116,6 +120,8 @@ public class ListOfMatchesFragment extends Fragment {
         writeDB.delete(TABLE_NAME, toDelete.toString(), null);
         writeDB.close();
     }
+
+
 
     private HashMap<CheckBox, Integer> getCheckBoxes(){//{checkBox, id}
         HashMap<CheckBox, Integer> output = new HashMap<>();
